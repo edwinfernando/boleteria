@@ -1,0 +1,46 @@
+[{
+        "id": "0",
+        "name": "Colombia",
+        "code": "+57",
+        "image": "/assets/flat/col.png",
+        "isChecked": false,
+        "expanded": false,
+        "listCiudad": [{
+                "id": "0",
+                "name": "Bogota",
+                "code": "+57"
+            },
+            {
+                "id": "0",
+                "name": "Cali",
+                "code": "+57"
+            },
+            {
+                "id": "0",
+                "name": "Medellin",
+                "code": "+57"
+            },
+            {
+                "id": "0",
+                "name": "Popayán",
+                "code": "+57"
+            }
+        ]
+    },
+    {
+        "id": "1",
+        "name": "Estados Unidos",
+        "code": "+1",
+        "image": "/assets/flat/usa.png",
+        "isChecked": false,
+        "expanded": false
+    },
+    {
+        "id": "2",
+        "name": "México",
+        "code": "+52",
+        "image": "/assets/flat/mex.png",
+        "isChecked": false,
+        "expanded": false
+    }
+]

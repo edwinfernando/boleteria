@@ -1,0 +1,114 @@
+<app-toolbar></app-toolbar>
+
+<ion-content [fullscreen]="true" [style.--background]="estiloGeneral.COLOR_BACKGROUND_GENERAL">
+    <ion-slides #ionSlides [style.background-color]="estiloGeneral.COLOR_BACKGROUND_SLIDES" mode="ios" pager="false" scrollbar="false">
+        <ion-slide class="tamano-slide" [style.background-color]="estiloSlide.COLOR_BACKGROUND" [style.background-image]="slide | domSanitizer">
+            <ion-row>
+                <ion-col class="text-left text-slide padding" size="12">
+                    <h1 [style.color]="estiloSlide.COLOR_TEXT_TITULO"><strong>Conoce nuestra historia</strong><span class="text-muted"></span></h1>
+                </ion-col>
+            </ion-row>
+
+        </ion-slide>
+    </ion-slides>
+    <ion-grid fixed>
+        <ion-list-header>
+            <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
+                <h1><strong>Nosotros</strong></h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-row>
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-item class="centrado transparent ion-text-justify" lines="none">
+                    <ion-label>
+                        <p [style.color]="estiloGeneral.COLOR_TEXT">At Ticketmaster, we strive to put fans first. Every day we're liste- ning to your feedback and working to improve your experience before, during, and after events. In 2010, Ticketmaster and Live Nation merged to create Live Nation
+                            Entertainment. Now you have more options than ever to enjoy live events, and things are only ge- tting better. We're making real changes and putting you first in everything we do. Here's just a taste of what we're up to...
+                            At Tic- ketmaster, we strive to put fans first. Every day we're listening to your feedback and working to improve your experience before, during, and after events. In 2010, Ticketmaster and Live Nation merged to create Live
+                            Nation Entertainment.</p>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-row>
+                    <ion-col size="12">
+                        <img class="border-radius image-info-nosotros" src="{{slide}}" alt="">
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="centrado" size="12">
+                <video class="videoPlayer" controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline">
+                <source src="./assets/videos/Part_1.mp4" type="video/mp4" />
+               </video>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <ion-row>
+                    <ion-col size="4">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-row>
+                    <ion-col size="12">
+                        <img class="border-radius image-info-nosotros" src="{{slide}}" alt="">
+                    </ion-col>
+
+                </ion-row>
+            </ion-col>
+
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-item class="centrado transparent ion-text-justify" lines="none">
+                    <ion-label>
+                        <p [style.color]="estiloGeneral.COLOR_TEXT">At Ticketmaster, we strive to put fans first. Every day we're liste- ning to your feedback and working to improve your experience before, during, and after events. In 2010, Ticketmaster and Live Nation merged to create Live Nation
+                            Entertainment. Now you have more options than ever to enjoy live events, and things are only ge- tting better. We're making real changes and putting you first in everything we do. Here's just a taste of what we're up to...
+                            At Tic- ketmaster, we strive to put fans first. Every day we're listening to your feedback and working to improve your experience before, during, and after events. In 2010, Ticketmaster and Live Nation merged to create Live
+                            Nation Entertainment.</p>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <!-- Aliados -->
+        <hr class="divider-event-dos">
+        <ion-list-header>
+            <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
+                <h1><strong>Aliados</strong></h1>
+            </ion-label>
+        </ion-list-header>
+        <ion-row>
+            <ion-col class="centrado" size="12">
+                <app-item-categoria *ngFor="let item of categorias" [categoria]="item"></app-item-categoria>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <app-promociona-evento></app-promociona-evento>
+    <app-footer></app-footer>
+</ion-content>

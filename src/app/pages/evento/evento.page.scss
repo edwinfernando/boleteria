@@ -1,0 +1,116 @@
+    .color-star {
+        ion-icon {
+            color: goldenrod;
+        }
+        ion-label {
+            margin-left: 10px;
+            font-weight: 500;
+        }
+    }
+    
+    .tamano-slide {
+        height: 40vw;
+        background-size: cover;
+        box-shadow: inset 0 0 100px #000000;
+        background-position: top;
+        background-repeat: space;
+        ion-row {
+            width: 100%;
+            height: 100%;
+            align-content: center;
+        }
+    }
+    
+    .text-slide {
+        position: absolute;
+        bottom: 5vw;
+        h1 {
+            font-size: 4vw;
+        }
+        h2 {
+            font-size: 2vw;
+        }
+    }
+    
+    .image-slide {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .padding-cero {
+        padding: 0px;
+    }
+    
+    .padding {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    
+    .item-info-general {
+        --background: transparent;
+        ion-label {
+            h6 {
+                font-size: .875rem;
+                line-height: 1.25rem;
+                color: #6d7688;
+            }
+        }
+    }
+    
+    .label-card {
+        text-align: center;
+        font-size: 0.8em;
+    }
+    
+    .boton-favoritos {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: azure;
+        z-index: 10;
+        border-radius: 0.5em;
+    }
+    
+    .swiper-button-next {
+        background-image: inherit;
+        right: 0;
+        top: 60%;
+        zoom: 3;
+    }
+    
+    .swiper-button-prev {
+        background-image: inherit;
+        top: 60%;
+        zoom: 3;
+    }
+    
+    .contador {
+        background: #e1e1e1;
+        border-radius: 1em;
+    }
+    
+    .select {
+        border-radius: 0.5em;
+        --placeholder-opacity: 1;
+        .select-icon {
+            width: 0px !important;
+        }
+    }
+    
+    .item-select {
+        padding-top: 5px;
+        // padding-bottom: 12px;
+        --border-radius: 10px;
+    }
+    
+    .videoPlayer {
+        width: 80%;
+        border-radius: 1em;
+    }
+    
+    .image-galery {
+        width: 100%;
+        height: 170px;
+        background-size: cover;
+    }

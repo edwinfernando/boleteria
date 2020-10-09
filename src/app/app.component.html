@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+    <!--<ion-menu menuId="primerMenu" type="overlay" contentId="principal" side="end">
+        <ion-content>
+            <ion-list>
+
+                <ion-menu-toggle [autoHide]="false" *ngFor="let m of menu | async; let i = index">
+                    <ion-item class="item-menu" (click)="redirectTo(m.redirecTo)" [lines]="isLine(i)">
+                        <ion-label>{{m.name}}</ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+
+            </ion-list>
+        </ion-content>
+    </ion-menu>-->
+
+    <ion-router-outlet id="principal"></ion-router-outlet>
+
 </ion-app>

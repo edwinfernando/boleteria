@@ -1,0 +1,53 @@
+<app-toolbar-modal></app-toolbar-modal>
+
+<ion-content class="centrado no-scroll ion-padding">
+    <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-label [style.color]="estiloGeneral.COLOR_TEXT">
+                        <h1><strong>Ingresa a tu cuenta</strong></h1>
+                    </ion-label>
+                </ion-col>
+                <ion-col size="12">
+                    <br>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="email" formControlName="correo" (ionBlur)="validarCampo('correo')" placeholder="Dirección de correo electronico"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isCorreoValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="password" formControlName="contrasena" (ionBlur)="validarCampo('contrasena')" placeholder="Contraseña"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isPasswordValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" [disabled]="loginForm.invalid" type="submit" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>Iniciar sesión</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="12">
+                    <a class="letter-small">¿Has olvidado tu contraseña?</a>
+                </ion-col>
+                <ion-col class="divider" size="12">
+                    <span class="authentication_divider-text "></span>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="openModalRegistrate()" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>Crear cuenta</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="12">
+                    <span><small>{{descripcion}}</small></span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

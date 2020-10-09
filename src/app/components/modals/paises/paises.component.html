@@ -1,0 +1,22 @@
+<ion-content>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col class="sin-padding" *ngFor="let pais of paises" size="12" size-sm="12">
+                <ion-item mode="ios" button (click)="onClickPais(pais)" [detailIcon]="iconDetail(pais)" lines="none" detail>
+                    <ion-avatar class="inner-shadow" slot="start">
+                        <img [src]="pais.image" alt="" />
+                    </ion-avatar>
+                    <ion-label class="texto negro">{{pais.name}}</ion-label>
+                </ion-item>
+
+                <app-expandible expandHeight="auto" [expanded]="pais.expanded">
+                    <ion-item class="icon-detail-size" *ngFor="let ciudad of pais.listCiudad" button (click)="seleccionaCiudad(ciudad)" mode="md" lines="none">
+                        <ion-label class="texto-item" color="medium">
+                            <h6>{{ciudad.name}}</h6>
+                        </ion-label>
+                    </ion-item>
+                </app-expandible>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

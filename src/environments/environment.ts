@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: 'http://142.93.0.82:8085',
+  nitEmpresa: '123456'
 };
 
 /*

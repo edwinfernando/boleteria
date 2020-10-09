@@ -1,0 +1,57 @@
+<ion-list [style.background-color]="estiloGeneral.COLOR_BACKGROUND_CATEGORIAS">
+    <ion-list-header>
+        <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
+            <h2><strong>¡Promociona tu evento con nosotros!</strong></h2>
+        </ion-label>
+    </ion-list-header>
+
+    <ion-grid fixed>
+        <ion-row>
+
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-item class="centrado transparent ion-text-justify" lines="none">
+                    <ion-label>
+                        <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-row>
+                    <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                        <ion-row>
+                            <ion-col size="12">
+                                <ion-item class="transparent" lines="none">
+                                    <ion-icon class="icon-redondos" [style.background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" name="logo-whatsapp"></ion-icon>
+                                    <ion-label>
+                                        <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                            (+57) 123 456 7890
+                                        </p>
+                                    </ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item class="transparent" lines="none">
+                                    <ion-icon class="icon-redondos" [style.background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" name="mail-outline"></ion-icon>
+                                    <ion-label>
+                                        <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                            promocionar@boletas.com
+                                        </p>
+                                    </ion-label>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                        <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" expand="block" fill="clear" mode="ios">
+                            <ion-text>
+                                <h3>Promocionar</h3>
+                            </ion-text>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <br>
+</ion-list>

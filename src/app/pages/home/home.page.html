@@ -1,0 +1,81 @@
+<app-toolbar></app-toolbar>
+
+<ion-content #content [fullscreen]="true" [style.--background]="estiloGeneral.COLOR_BACKGROUND_GENERAL">
+    <!--<ion-grid fixed>-->
+    <app-slide [imagenesSlide]="imagenesSlide"></app-slide>
+
+    <!--</ion-grid>-->
+    <ion-grid class="grid-buscar" fixed>
+        <ion-grid fixed>
+            <ion-row class="border-radius" [style.background]="estiloToolbar.COLOR_BACKGROUND_SEARCH">
+                <ion-col class="sin-padding" size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                    <ion-searchbar class="toolbar-buscar" [style.color]="estiloGeneral.COLOR_TEXT" [style.--placeholder-color]="estiloGeneral.COLOR_TEXT" search-icon="false" placeholder="Buscar evento o artista" [debounce]="700" [value]="textoBuscar" (ionChange)="buscar($event)"
+                        animated [debounce]="700" mode="ios"></ion-searchbar>
+                </ion-col>
+                <ion-col class="sin-padding" size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                    <ion-row>
+                        <ion-col size="4">
+                            <ion-item class="item-select item-style" lines="none" mode="ios">
+                                <ion-select class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Categorias" [interfaceOptions]="customPopoverOptions" interface="popover">
+                                    <ion-select-option value="f">Female</ion-select-option>
+                                    <ion-select-option value="m">Male</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                            <ion-item class="item-select item-style" lines="none" mode="ios">
+                                <ion-select class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Ciudad" [interfaceOptions]="customPopoverOptions" interface="popover">
+                                    <ion-select-option value="f">Female</ion-select-option>
+                                    <ion-select-option value="m">Male</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                            <ion-item class="item-select item-style" lines="none" mode="ios">
+                                <ion-select class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Fecha" [interfaceOptions]="customPopoverOptions" interface="popover">
+                                    <ion-select-option value="f">Female</ion-select-option>
+                                    <ion-select-option value="m">Male</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+
+
+            </ion-row>
+
+        </ion-grid>
+    </ion-grid>
+
+    <ion-grid class="margin-eventos" fixed>
+        <ion-list [style.background-color]="estiloGeneral.COLOR_BACKGROUND_EVENTOS">
+            <ion-list-header>
+                <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
+                    <h2><strong>Eventos</strong></h2>
+                </ion-label>
+            </ion-list-header>
+
+            <ion-row>
+                <ion-col *ngFor="let evento of eventos" [sizeLg]="sizeEventoLg(evento.eventoTipoEventoId)" [sizeMd]="sizeEvento(evento.eventoTipoEventoId)" [sizeSm]="sizeEvento(evento.eventoTipoEventoId)" size-xs="12">
+                    <app-item-evento *ngIf="evento.eventoTipoEventoId === 1" [evento]="evento"></app-item-evento>
+                    <app-item-evento-dos *ngIf="evento.eventoTipoEventoId !== 1" [evento]="evento"></app-item-evento-dos>
+                </ion-col>
+                <ion-col class="col-button-acceso centrado" size="12">
+                    <ion-button [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" size="small" fill="clear" (click)="getCargarEventos()" mode="ios">
+                        <ion-text>
+                            <h6>Ver más eventos</h6>
+                        </ion-text>
+                    </ion-button>
+                </ion-col>
+                <ion-col class="centrado" size="12">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </ion-col>
+            </ion-row>
+
+        </ion-list>
+    </ion-grid>
+
+    <app-promociona-evento></app-promociona-evento>
+
+    <app-footer></app-footer>
+</ion-content>

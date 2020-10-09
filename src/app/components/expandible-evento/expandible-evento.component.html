@@ -1,0 +1,77 @@
+<ion-grid fixed>
+    <ion-row>
+        <ion-col size="6">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item class="item-style background-gris" mode="md" lines="none">
+                        <ion-icon class="icon-redondos" name="calendar-outline" color="medium"></ion-icon>
+                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Miércoles 01 de oct., 2021</ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item class="item-style background-gris" mode="md" lines="none">
+                        <ion-icon class="icon-redondos" name="time-outline" color="medium"></ion-icon>
+                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Hora: 02:00 p.m.</ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col size="6">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item class="item-style background-gris" mode="md" lines="none">
+                        <ion-icon class="icon-redondos" name="location-outline" color="medium"></ion-icon>
+                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Plaza de Toros, Cra. 56 #3-156 </ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item class="item-style background-gris" mode="md" lines="none">
+                        <ion-icon class="icon-redondos" name="location-outline" color="medium"></ion-icon>
+                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Cali, Valle del Cauca </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col class="divider" size="12">
+            <span class="authentication_divider-text "></span>
+        </ion-col>
+        <ion-col size="6">
+            <ion-item lines="none">
+                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Localidad: VIP</ion-label>
+            </ion-item>
+        </ion-col>
+        <ion-col size="6">
+            <ion-item lines="none">
+                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Silla: N-1</ion-label>
+            </ion-item>
+        </ion-col>
+
+        <ion-col *ngIf="notificacion.transferible" size="12">
+            <ion-row>
+                <ion-col size-lg="8" size-md="8" size-sm="0" size-xs="0">
+                </ion-col>
+                <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="openModalTransferir()" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>Transferir</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+
+        <ion-col *ngIf="notificacion.received" size="12">
+            <ion-row>
+                <ion-col size-lg="8" size-md="8" size-sm="0" size-xs="0">
+                </ion-col>
+                <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="openModalAceptarEntrada()" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>Aceptar entrada</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-grid>

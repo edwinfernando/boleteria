@@ -1,0 +1,79 @@
+.divider {
+    margin: 0px;
+    padding: 0px;
+}
+
+.ticket {
+    // background: #448CCB;
+    position: relative;
+    width: 100%;
+    display: block;
+    z-index: 2;
+}
+
+.dots span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 50%;
+    top: 0;
+    transform: translateY(-50%);
+}
+
+span {
+    background: #9a9a9a;
+}
+
+//#6d6d6d
+.dots span:nth-child(1) {
+    left: -212px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: -33px;
+    width: 70px;
+    height: 70px;
+    border-radius: 0px 15px 0px 0px;
+    ;
+}
+
+.dots span:nth-child(2) {
+    left: -100px;
+}
+
+.dots span:nth-child(3) {
+    left: -60px;
+}
+
+.dots span:nth-child(4) {
+    left: -20px;
+}
+
+.dots span:nth-child(5) {
+    left: 20px;
+}
+
+.dots span:nth-child(6) {
+    left: 60px;
+}
+
+.dots span:nth-child(7) {
+    left: 100px;
+}
+
+.dots span:nth-child(8) {
+    right: -217px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: -33px;
+    width: 70px;
+    height: 70px;
+    border-radius: 0px 0px 0px 15px;
+    ;
+}

@@ -1,0 +1,87 @@
+<app-toolbar></app-toolbar>
+
+<ion-content>
+    <ion-grid fixed>
+
+        <ion-item lines="none" mode="ios">
+            <ion-thumbnail class="image-perfil" [style.background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO">
+                <ion-label [style.color]="estiloBotones.COLOR_TEXT" class="inicialesPerfil">{{detalleUsuario.usuarioIniciales}}</ion-label>
+            </ion-thumbnail>
+            <ion-card-content>
+                <ion-card-subtitle [style.color]="estiloGeneral.COLOR_TEXT">
+                    <h2><strong>{{detalleUsuario.usuarioNombrePersona}}</strong></h2>
+                </ion-card-subtitle>
+
+                <hr [style.background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" class="divider-event">
+
+                <!--{{evento.description}}-->
+                <ion-label>
+                    <p [style.color]="estiloGeneral.COLOR_TEXT">Correo: {{detalleUsuario.usuarioEmail}}</p>
+                </ion-label>
+                <ion-label>
+                    <p [style.color]="estiloGeneral.COLOR_TEXT">Celular: {{detalleUsuario.usuarioCelular}}</p>
+                </ion-label>
+            </ion-card-content>
+
+            <ion-row slot="end">
+                <ion-col size="12" class="ion-text-right">
+                    <ion-label class="cursor" color="medium" button (click)="onClickEditarPerfil()">
+                        <p>Editar perfil</p>
+                    </ion-label>
+                </ion-col>
+                <ion-col size="12" class="ion-text-right">
+                    <ion-label class="cursor" color="medium" button (click)="onClickCerrarSesion()">
+                        <p>Cerrar sesión</p>
+                    </ion-label>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+
+        <ion-segment [(ngModel)]="seccion" mode="md">
+            <ion-segment-button [style.--color-checked]="estiloGeneral.COLOR_TEXT" value="eventos">
+                <ion-label>Mis eventos</ion-label>
+            </ion-segment-button>
+            <!-- 
+            <ion-segment-button [style.--color-checked]="estiloGeneral.COLOR_TEXT" value="descuentos">
+                <ion-label>Mis descuentos</ion-label>
+            </ion-segment-button>
+            <ion-segment-button [style.--color-checked]="estiloGeneral.COLOR_TEXT" value="favoritos">
+                <ion-label>Eventos favoritos</ion-label>
+            </ion-segment-button>
+            <ion-segment-button [style.--color-checked]="estiloGeneral.COLOR_TEXT" value="qr">
+                <ion-label>Cargar código QR</ion-label>
+            </ion-segment-button>-->
+            <ion-segment-button [style.--color-checked]="estiloGeneral.COLOR_TEXT" value="Notificaciones">
+
+                <ion-label>
+                    <ion-avatar class="noti" [style.background]="true? estiloBotones.COLOR_BACKGROUND_B_PIN: ''">
+                    </ion-avatar>Notificaciones</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <hr class="divider-event-dos">
+        <div [ngSwitch]="seccion">
+            <ion-grid class="sin-padding" *ngSwitchCase="'eventos'">
+                <app-mis-eventos (ajustarToolbar)="ajustarFooterEmitter($event)"></app-mis-eventos>
+            </ion-grid>
+
+            <!--
+            <ion-grid class="sin-padding" *ngSwitchCase="'descuentos'">
+                descuentos
+            </ion-grid>
+
+            <ion-grid class="sin-padding" *ngSwitchCase="'favoritos'">
+                favoritos
+            </ion-grid>
+
+            <ion-grid class="sin-padding" *ngSwitchCase="'qr'">
+                qr
+            </ion-grid>-->
+
+            <ion-grid class="sin-padding" *ngSwitchCase="'Notificaciones'">
+                <app-notificaciones (ajustarToolbar)="ajustarFooterEmitter($event)"></app-notificaciones>
+            </ion-grid>
+        </div>
+    </ion-grid>
+
+    <app-footer class="footer" [ngStyle]="{'position': !ajustarFooter? 'absolute' : 'relative'}"></app-footer>
+</ion-content>

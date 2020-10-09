@@ -1,0 +1,36 @@
+[{
+        "icon": "exit-outline",
+        "name": "Mis entradas",
+        "redirecTo": "/action-sheet"
+    },
+    {
+        "icon": "exit-outline",
+        "name": "Editar perfil",
+        "redirecTo": "/action-sheet"
+    },
+    {
+        "icon": "exit-outline",
+        "name": "¿Necesitas ayuda?",
+        "redirecTo": "/action-sheet"
+    },
+    {
+        "icon": "exit-outline",
+        "name": "Contacto",
+        "redirecTo": "/action-sheet"
+    },
+    {
+        "icon": "exit-outline",
+        "name": "Nosotros",
+        "redirecTo": "/nosotros"
+    },
+    {
+        "icon": "exit-outline",
+        "name": "Promociona tu evento",
+        "redirecTo": "/action-sheet"
+    },
+    {
+        "icon": "exit-outline",
+        "name": "Cerrar sesión",
+        "redirecTo": "cerrarSesion"
+    }
+]

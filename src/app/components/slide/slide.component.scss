@@ -1,0 +1,51 @@
+.swiper-pagination>>>.swiper-pagination-bullet {
+    bottom: 40px;
+}
+
+.tamano-slide {
+    height: 40vw;
+    background-size: cover;
+    box-shadow: inset 0 0 100px #000000;
+    background-position: top;
+    background-repeat: space;
+    ion-row {
+        width: 100%;
+        height: 100%;
+        align-content: center;
+    }
+}
+
+.image-slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-slide {
+    position: absolute;
+    bottom: 5vw;
+    h1 {
+        font-size: 4vw;
+    }
+    h2 {
+        font-size: 2vw;
+    }
+}
+
+.padding {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.swiper-button-next {
+    background-image: inherit;
+    right: 0;
+    top: 60%;
+    zoom: 3;
+}
+
+.swiper-button-prev {
+    background-image: inherit;
+    top: 60%;
+    zoom: 3;
+}

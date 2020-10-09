@@ -1,0 +1,83 @@
+<app-toolbar-modal></app-toolbar-modal>
+
+<ion-content class="centrado no-scroll ion-padding">
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="12">
+                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">
+                    <h1><strong>Solicitar entrada</strong></h1>
+                </ion-label>
+            </ion-col>
+            <!-- DATOS -->
+            <ion-col size="12">
+                <!-- <ion-item (click)="onClickExpandDatosUsuario()" detailIcon="chevron-down-outline" lines="full" detail>
+                    <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Por datos de usuario</ion-label>
+                </ion-item>-->
+                <app-expandible expandHeight="auto" [expanded]="expandedDatosUsuario">
+
+                    <ion-row>
+                        <ion-col size="12">
+                            <br>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item class="input-style" lines="none" mode="ios">
+                                <ion-input type="text" placeholder="Nombres y apellidos"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item class="input-style" lines="none" mode="ios">
+                                <ion-input type="email" placeholder="Correo electronico"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item class="input-style" lines="none" mode="ios">
+                                <ion-input type="tel" placeholder="Celular"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <br>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="transferirBoleta()" expand="block" fill="clear">
+                                <ion-item class="item-style item-button" lines="none" mode="ios">
+                                    <ion-label>SOLICITAR</ion-label>
+                                </ion-item>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </app-expandible>
+            </ion-col>
+            <!-- QR 
+            <ion-col size="12">
+                <ion-item (click)="onClickExpandCodigoQr()" detailIcon="chevron-down-outline" lines="full" detail>
+                    <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Por código QR</ion-label>
+                </ion-item>
+                <app-expandible expandHeight="auto" [expanded]="expandedCodigoQr">
+                    <ion-row>
+                        <ion-col size="12">
+                            <span><small>Permite que la persona escanee el QR con su celular u oprime el botón “Transferir”
+                        para enviar el código a su correo.</small></span>
+                        </ion-col>
+                        <ion-col size="12">
+                            <img src="assets/imagen_qr.png" alt="">
+                        </ion-col>
+                        <ion-col size="12">
+                            <hr class="divider-event-dos">
+                        </ion-col>
+
+                        <ion-col size="12">
+                            <ion-item class="transparent" lines="none">
+                                <ion-icon class="icon-redondos" [style.background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" name="mail-outline"></ion-icon>
+                                <ion-label>
+                                    <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                        Transferir por correo
+                                    </p>
+                                </ion-label>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </app-expandible>
+            </ion-col>-->
+        </ion-row>
+    </ion-grid>
+</ion-content>

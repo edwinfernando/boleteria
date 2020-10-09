@@ -1,0 +1,23 @@
+<div class="swiper-container">
+    <ion-slides #ionSlides [style.background-color]="estiloGeneral.COLOR_BACKGROUND_SLIDES" [style.--bullet-background-active]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" mode="ios" pager="true" scrollbar="false" [options]="slideOpts">
+        <ion-slide *ngFor="let slide of imagenesSlide" class="tamano-slide" [style.background-color]="estiloSlide.COLOR_BACKGROUND" [style.background-image]="slide.url | domSanitizer">
+            <!-- type 1 -->
+            <ion-row>
+                <ion-col class="text-left text-slide padding" size="6">
+                    <h1 [style.color]="estiloSlide.COLOR_TEXT_TITULO"><strong>{{slide.nombre}}</strong><span class="text-muted"></span></h1>
+                    <h2 class="lead" [style.color]="estiloSlide.COLOR_TEXT_DESCRIPCION">{{slide.fecha | date: 'dd MMMM, yyyy'}}</h2>
+                </ion-col>
+            </ion-row>
+            <!-- type 2 -->
+
+            <!--<img *ngIf="slide.type === 2" class="image-slide" [src]="slide.image" alt="">-->
+        </ion-slide>
+        <!-- Add Arrows -->
+    </ion-slides>
+    <div class="swiper-button-next" i-button (click)="next()">
+        <ion-icon [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" name="chevron-forward-outline"></ion-icon>
+    </div>
+    <div class="swiper-button-prev" i-button (click)="prev()">
+        <ion-icon [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" name="chevron-back-outline"></ion-icon>
+    </div>
+</div>

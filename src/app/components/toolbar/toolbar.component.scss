@@ -1,0 +1,26 @@
+.toolbar {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.button-toggle {
+    background: transparent;
+    ion-icon {
+        zoom: 2;
+    }
+}
+
+.avatar-flat-toolbar {
+    width: 20px;
+    height: 20px;
+}
+
+.label-button {
+    text-transform: capitalize;
+}
+
+.label-mi-perfil {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}

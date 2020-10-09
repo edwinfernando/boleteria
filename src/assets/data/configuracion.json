@@ -1,0 +1,45 @@
+{
+    "VERSION": "1",
+    "MARCA": "Marca Blanca",
+    "IMAGEN": "",
+    "ESTILOS": {
+        "GENERAL": {
+            "COLOR_BACKGROUND_GENERAL": "#FFFFFF",
+            "COLOR_BACKGROUND_SLIDES": "#FFFFFF",
+            "COLOR_BACKGROUND_EVENTOS": "#FFFFFF",
+            "COLOR_BACKGROUND_CATEGORIAS": "#e1e1e1",
+            "COLOR_TEXT": "#0b409f"
+        },
+        "TOOLBAR": {
+            "COLOR_BACKGROUND": "#a038c3",
+            "COLOR_TEXT": "#FFFFFF",
+            "COLOR_BACKGROUND_SEARCH": "#e1e1e1",
+            "COLOR_TEXT_SEARCH": "#FFFFFF"
+        },
+        "SLIDE": {
+            "COLOR_BACKGROUND": "#000000",
+            "COLOR_TEXT_TITULO": "#FFFFFF",
+            "COLOR_TEXT_DESCRIPCION": "#FFFFFF"
+        },
+        "EVENTOS": {
+            "COLOR_BACKGROUND": "#e1e1e1",
+            "COLOR_TEXT_TITULO": "#0b409f",
+            "COLOR_TEXT_SUBTITULO": "#000000",
+            "COLOR_TEXT_VALOR": "#3880ff",
+            "COLOR_TEXT_DOLAR": "#818181",
+            "COLOR_TEXT_DESCRIPCION": "#0b409f",
+            "COLOR_TEXT_F_TIEMPO": "#818181"
+        },
+        "BOTONES": {
+            "COLOR_BACKGROUND_B_ACCESO": "#a038c3",
+            "COLOR_BACKGROUND_B_PIN": "#00d811",
+            "COLOR_BACKGROUND_B_COMPARTIR": "#e1e1e1",
+            "COLOR_TEXT": "#FFFFFF"
+        },
+        "FOOTER": {
+            "COLOR_BACKGROUND": "#011c7d",
+            "COLOR_TEXT_TITULO": "#FFFFFF",
+            "COLOR_TEXT_CONTENIDO": "#FFFFFF"
+        }
+    }
+}

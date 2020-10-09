@@ -1,0 +1,24 @@
+.image-perfil {
+    --border-radius: 1em;
+    width: 90px;
+    height: 90px;
+    padding: 19px;
+}
+
+ion-segment-button {
+    --indicator-color: transparent !important;
+    --indicator-color-checked: transparent !important;
+    text-transform: none;
+}
+
+.noti {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.footer {
+    width: 100%;
+    bottom: 0;
+}
