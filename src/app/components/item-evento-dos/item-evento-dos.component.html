@@ -7,8 +7,8 @@
         </div>
     </div>
 
-    <ion-item *ngIf="evento.eventoTipoEvento === 'Virtual'" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_PIN" class="virtual" lines="none">
-        <ion-label>Virtual</ion-label>
+    <ion-item *ngIf="evento.eventoModalidadEventoId !== 128" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_PIN" class="virtual" lines="none">
+        <ion-label>{{evento.eventoModalidadEventoId === 219? 'Virtual' : 'Presencial y virtual'}}</ion-label>
     </ion-item>
     <ion-card-content>
         <ion-row>

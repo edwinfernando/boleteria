@@ -12,29 +12,41 @@ export class NotificacionesPage implements OnInit {
   @Output() ajustarToolbar = new EventEmitter<boolean>();
   lNotificacion: Notificacion [] = [
     {
+      nombre: 'Jhony Velasco',
+      valor: '$200.000',
       notificacion: 'Jhony Velasco te ha solicitado una entrada',
       expanded: false,
+      evento: 'Concierto 1',
       opened: false,
       transferible: true,
       received: false
     },
     {
+      nombre: 'Juan Esteban',
+      valor: '$200.000',
       notificacion: 'Juan Esteban Masmela te ha enviado una entrada',
       expanded: false,
+      evento: 'Concierto 2',
       opened: false,
       transferible: false,
       received: true
     },
     {
+      nombre: 'Sebastian Suaza',
+      valor: '$200.000',
       notificacion: 'Sebastian Suaza te ha enviado una entrada',
       expanded: false,
+      evento: 'Concierto 2',
       opened: true,
       transferible: true,
       received: false
     },
     {
+      nombre: 'Erika Inés Aguirre',
+      valor: '$200.000',
       notificacion: 'Erika Inés Aguirre te ha enviado una entrada',
       expanded: false,
+      evento: 'Concierto 4',
       opened: true,
       transferible: false,
       received: true

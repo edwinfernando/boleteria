@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataLocalService } from '../../services/data-local.service';
-import { FOOTER, BOTONES } from '../../interfaces/interfaces';
+import { FOOTER, BOTONES, EMPRESA } from '../../interfaces/interfaces';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,16 @@ import { Router } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
 
+  marca: string;
+  imagen: string;
+  empresa: EMPRESA = {
+    nombreEmpresa: '',
+    nitEmpresa: '',
+    estadoEmpresa: '',
+    correoEmpresa: '',
+    telefonoEmpresa: '',
+    direccionEmpresa: ''
+  };
   estilosFooter: FOOTER = {
     COLOR_BACKGROUND: '',
     COLOR_TEXT_TITULO: '',
@@ -29,7 +39,13 @@ export class FooterComponent implements OnInit {
       if ( resp.ESTILOS !== undefined) {
         this.estilosFooter = resp.ESTILOS.FOOTER;
         this.estiloBotones = resp.ESTILOS.BOTONES;
+        this.marca = resp.MARCA;
+        this.imagen = resp.IMAGEN;
       }
+    });
+
+    this.dataLocal.cargarEmpresa().then( resp => {
+      this.empresa = resp;
     });
   }
 

@@ -1,0 +1,7 @@
+<ion-content>
+
+    <ion-item *ngFor="let cant of cantidad" class="" mode="ios" button (click)="onClickCant(cant)" lines="none" detail="false">
+        <ion-label class="texto text-center" [style.color]="estiloGeneral.COLOR_TEXT">{{cant}}</ion-label>
+    </ion-item>
+
+</ion-content>

@@ -1,5 +1,5 @@
 .tamano-slide {
-    height: 40vw;
+    height: 40vh;
     background-size: cover;
     box-shadow: inset 0 0 100px #000000;
     background-position: top;
@@ -45,4 +45,5 @@
 .videoPlayer {
     width: 80%;
     border-radius: 1em;
+    --border-radius: 1em;
 }

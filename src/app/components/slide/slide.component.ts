@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Slide, SLIDE, GENERAL, BOTONES, EventoImagene } from '../../interfaces/interfaces';
+import { Slide, SLIDE, GENERAL, BOTONES, EventoImagenes } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { DataService } from '../../services/data.service';
 import { IonSlides } from '@ionic/angular';
@@ -13,7 +13,7 @@ export class SlideComponent implements OnInit {
 
  // @Input() slide: Slide;
   slides: Slide[] = [];
-  @Input() imagenesSlide: EventoImagene[] = [];
+  @Input() imagenesSlide: EventoImagenes[] = [];
   @ViewChild('ionSlides') ionSlides: IonSlides;
 
   slideOpts = {

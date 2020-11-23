@@ -1,9 +1,9 @@
-<app-toolbar></app-toolbar>
+<app-toolbar [page]="'evento'"></app-toolbar>
 
 <ion-content [fullscreen]="true" [scrollEvents]="true" [style.--background]="estiloGeneral.COLOR_BACKGROUND_GENERAL">
-    <div class="swiper-container">
+    <div class="swiper-container" id="inicio">
         <ion-slides #ionSlides [style.background-color]="estiloGeneral.COLOR_BACKGROUND_SLIDES" [style.--bullet-background-active]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" mode="ios" pager="true" scrollbar="false" [options]="slideOpts">
-            <ion-slide *ngFor="let imagen of evento.eventoImagenes" class="tamano-slide" [style.background-color]="estiloSlide.COLOR_BACKGROUND" [style.background-image]="imagen.url | domSanitizer">
+            <ion-slide *ngFor="let imagen of imagenesBanner" class="tamano-slide" [style.background-color]="estiloSlide.COLOR_BACKGROUND" [style.background-image]="imagen.url | domSanitizer">
                 <ion-row>
                     <ion-col class="text-left text-slide padding" size="6">
                         <h1 [style.color]="estiloSlide.COLOR_TEXT_TITULO "><strong>{{imagen.nombre}}</strong><span class="text-muted"></span></h1>
@@ -28,11 +28,19 @@
         <ion-row>
             <ion-col size-lg="8" size-md="8" size-sm="12" size-xs="12">
                 <ion-row>
+                    <ion-col size-lg="12" size-md="12" size-sm="12" size-xs="12">
+                        <ion-item class="item-style background-gris" mode="md" lines="none">
+                            <ion-label class="ion-text-uppercase" [style.color]="estiloGeneral.COLOR_TEXT">
+                                <strong>{{evento.eventoNombre}}</strong>
+                            </ion-label>
+                            <!--<ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT" slot="end">{{notificacion.valor}}</ion-label>-->
+                        </ion-item>
+                    </ion-col>
                     <ion-col size-lg="4" size-md="4" size-sm="6" size-xs="6">
                         <ion-item class="transparent" lines="none">
                             <ion-icon class="icon-redondos" [style.color]="estiloGeneral.COLOR_TEXT" name="calendar-outline"></ion-icon>
                             <ion-label class="label-descripcion">
-                                <p [style.color]="estiloGeneral.COLOR_TEXT" class="priMayuscula" s>
+                                <p [style.color]="estiloGeneral.COLOR_TEXT" class="priMayuscula">
                                     {{evento.eventoFechaInicio | date: 'EEEE,'}}
                                 </p>
                                 <p [style.color]="estiloGeneral.COLOR_TEXT">
@@ -91,6 +99,14 @@
                                     {{evento.eventoFechaInicio | date: 'h:mm a'}}
                                 </p>
                             </ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="4" size-md="4" size-sm="6" size-xs="6">
+                        <ion-item *ngIf="evento.eventoModalidadEventoId !== 128" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_PIN" class="border-radius centrado" lines="none">
+                            <ion-label>{{evento.eventoModalidadEventoId === 219? 'Virtual' : 'Presencial y virtual'}}</ion-label>
+                        </ion-item>
+                        <ion-item *ngIf="evento.eventoModalidadEventoId === 128" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_PIN" class="border-radius centrado" lines="none">
+                            <ion-label>Presencial</ion-label>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -160,36 +176,27 @@
 
         <ion-grid fixed>
             <ion-row>
-                <ion-col size-lg="4" size-md="4" size-sm="7" size-xs="7">
-                    <ion-item class="item-select item-style" lines="none" mode="ios">
-                        <ion-select class="select" [style.background-color]="estiloEvento.COLOR_BACKGROUND" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar localidad" [interfaceOptions]="customPopoverOptions" interface="popover">
-                            <ion-select-option value="f">Female</ion-select-option>
-                            <ion-select-option value="m">Male</ion-select-option>
-                        </ion-select>
+                <ion-col [sizeLg]="tieneSillas() !== 0? 6 : 12" [sizeMd]="tieneSillas() !== 0? 6 : 12" size-sm="12" size-xs="12">
+                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" button (click)="seleccionarLocalidad($event)" detailIcon="chevron-down-outline" lines="none" detail>
+                        <ion-input class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar localidad" [value]="zonaNombre" readonly>
+                        </ion-input>
                     </ion-item>
                 </ion-col>
-                <ion-col size-lg="3" size-md="3" size-sm="5" size-xs="5">
-                    <ion-item class="item-select item-style" lines="none" mode="ios">
-                        <ion-select class="select" [style.background-color]="estiloEvento.COLOR_BACKGROUND" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Selecionar sillas" [interfaceOptions]="customPopoverOptions" interface="popover">
-                            <ion-select-option value="f">Female</ion-select-option>
-                            <ion-select-option value="m">Male</ion-select-option>
-                        </ion-select>
+                <ion-col *ngIf="tieneSillas() === 1" size-lg="3" size-md="3" size-sm="7" size-xs="7">
+                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" button (click)="seleccionarSilleteria($event)" detailIcon="chevron-down-outline" lines="none" detail>
+                        <ion-input class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar sillas" [value]="numeroSillas" readonly>
+                        </ion-input>
                     </ion-item>
                 </ion-col>
-                <ion-col size-lg="2" size-md="2" size-sm="5" size-xs="5">
-                    <ion-item class="item-select item-style" lines="none" mode="ios">
-                        <ion-select class="select" [style.background-color]="estiloEvento.COLOR_BACKGROUND" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Cantidad" [interfaceOptions]="customPopoverOptions" interface="popover">
-                            <ion-select-option value="f">Female</ion-select-option>
-                            <ion-select-option value="m">Male</ion-select-option>
-                        </ion-select>
+                <ion-col *ngIf="tieneSillas() === 2" size-lg="3" size-md="3" size-sm="7" size-xs="7">
+                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" button (click)="seleccionarCantidad($event)" detailIcon="chevron-down-outline" lines="none" detail>
+                        <ion-input class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar sillas" [value]="numeroSillas" readonly>
+                        </ion-input>
                     </ion-item>
                 </ion-col>
-                <ion-col size-lg="3" size-md="3" size-sm="7" size-xs="7">
+                <ion-col *ngIf="tieneSillas() !== 0" size-lg="3" size-md="3" size-sm="5" size-xs="5">
                     <ion-item class="item-select item-style" lines="none" mode="ios">
-                        <ion-select class="select" [style.background-color]="estiloEvento.COLOR_BACKGROUND" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Precio" [interfaceOptions]="customPopoverOptions" interface="popover">
-                            <ion-select-option value="f">Female</ion-select-option>
-                            <ion-select-option value="m">Male</ion-select-option>
-                        </ion-select>
+                        <ion-input class="ion-text-center" [style.background-color]="estiloEvento.COLOR_BACKGROUND" [style.color]="estiloGeneral.COLOR_TEXT" type="text" placeholder="Valor" [value]="valor" readonly></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -203,8 +210,8 @@
             </ion-label>
         </ion-list-header>
         <ion-row>
-            <ion-col size="12">
-                <img src="assets/imagen_mapa.png" alt="">
+            <ion-col *ngIf="imagenEscenario" class="ion-text-center" size="12">
+                <img class="image-mapa" [style.background-image]="imagenEscenario.url | domSanitizer" alt="">
             </ion-col>
             <ion-col size="12">
                 <ion-row>
@@ -219,7 +226,7 @@
 
                     </ion-col>
                     <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
-                        <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" (click)="openVerificarPedido()" mode="ios" fill="clear">
+                        <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" [disabled]="!numeroSillas" (click)="openVerificarPedido()" mode="ios" fill="clear">
                             <ion-text>
                                 <h3>Comprar entrada</h3>
                             </ion-text>
@@ -237,29 +244,25 @@
             </ion-label>
         </ion-list-header>
         <ion-row>
-            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+            <ion-col size-lg="12" size-md="12" size-sm="12" size-xs="12">
                 <ion-item class="centrado transparent ion-text-justify" lines="none">
                     <ion-label>
-                        <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                        <p [style.color]="estiloGeneral.COLOR_TEXT">{{evento.eventoDescripcion}}</p>
                     </ion-label>
                 </ion-item>
             </ion-col>
-            <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
-                <ion-item class="centrado transparent ion-text-justify" lines="none">
-                    <ion-label>
-                        <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-                    </ion-label>
-                </ion-item>
-            </ion-col>
-            <ion-col *ngIf="evento.eventoVideo !== ''" class="centrado" size="12">
-                <video class="videoPlayer" controls="controls" preload="none" webkit-playsinline="webkit-playsinline" (click)="toggleVideo()" #videoPlayer>
-                    <source [src]="getLink()" type="video/mp4" />
-                </video>
-                <!--<iframe width="420" height="315" [src]="getLink()" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+
+            <ion-col *ngIf="evento.eventoVideo" class="centrado" size="12">
+                <!--<video class="videoPlayer" controls="controls" preload="none" webkit-playsinline="webkit-playsinline" (click)="toggleVideo()" #videoPlayer>
+                    <source [src]="url" type="video/mp4" />
+                </video>-->
+                <iframe class="videoPlayer" [src]="vidUrl" frameborder="0" allowfullscreen></iframe>
+
+                <!--<div class="videoPlayer" [innerHtml]="url"></div>-->
             </ion-col>
             <ion-col size="12">
                 <ion-row>
-                    <ion-col *ngFor="let imagen of evento.eventoImagenes; let i = index" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+                    <ion-col class="galeria" *ngFor="let imagen of imagenesEvento; let i = index" size-lg="4" size-md="4" size-sm="12" size-xs="12">
                         <img *ngIf="(i < 3)" class="border-radius image-galery" [style.background-image]="imagen.url | domSanitizer" alt="">
                     </ion-col>
                 </ion-row>
@@ -271,41 +274,59 @@
     <ion-list [style.background-color]="estiloGeneral.COLOR_BACKGROUND_CATEGORIAS">
         <ion-list-header>
             <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
-                <h2><strong>Información General del evento</strong></h2>
+                <h2><strong>Información general del evento</strong></h2>
             </ion-label>
         </ion-list-header>
 
         <ion-grid fixed>
             <ion-row>
-
-                <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
-                    <ion-item class="transparent centrado ion-text-left" lines="none">
+                <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                    <ion-item class="transparent centrado ion-text-left item-restriciones" lines="none">
                         <ion-label>
-                            <p [style.color]="estiloGeneral.COLOR_TEXT">Organiza:AMERICA DE CALI Nit:890305773-4 <br> Pulep:N/A <br> Categoría:Futbol <br> Ingreso de menores de edad:No aplica Ingreso de mujeres embarazadas:No Ingreso de personas con movilidad reducida</p>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Organiza: {{evento.eventoOrganizador.nombre}}</p>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item class="transparent centrado ion-text-left item-restriciones" lines="none">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Nit: {{evento.eventoOrganizador.nit}}</p>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item class="transparent centrado ion-text-left item-restriciones" lines="none">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Pulep: {{evento.eventoOrganizador.pulep}}</p>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item class="transparent centrado ion-text-left item-restriciones" lines="none">
+                        <ion-label>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">Categoría: {{evento.eventoCategoria}}</p>
                         </ion-label>
                     </ion-item>
                 </ion-col>
-
-                <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
-                    <ion-item class="centrado transparent ion-text-justify" lines="none">
+                <ion-col size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                    <ion-item *ngFor="let restricion of evento.restrinciones" class="transparent centrado ion-text-left item-restriciones" lines="none">
                         <ion-label>
-                            <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-
-                <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
-                    <ion-item class="centrado transparent ion-text-justify" lines="none">
-                        <ion-label>
-                            <p [style.color]="estiloGeneral.COLOR_TEXT">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam no- nummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">{{restricion.nombre}}</p>
                         </ion-label>
                     </ion-item>
                 </ion-col>
             </ion-row>
         </ion-grid>
-
         <br>
     </ion-list>
+    <!-- Aliados 
+    <hr class="divider-event-dos">-->
+    <ion-grid fixed>
+        <ion-list-header>
+            <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
+                <h2><strong>Patrocinadores del evento</strong></h2>
+            </ion-label>
+        </ion-list-header>
+        <ion-row>
+            <ion-col class="centrado" size="12">
+                <app-item-patrocinador *ngFor="let patrocinador of evento.patrocinadores" [patrocinador]="patrocinador"></app-item-patrocinador>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
     <app-footer></app-footer>
 </ion-content>

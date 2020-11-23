@@ -5,9 +5,10 @@
                 <ion-col size-lg="8" size-md="8" size-sm="12" size-xs="12">
                     <ion-row>
                         <ion-col size="12">
-                            <ion-label [style.color]="estilosFooter.COLOR_TEXT_TITULO">
-                                <h1><strong>Marca Blanca</strong></h1>
+                            <ion-label *ngIf="imagen === ''" [style.color]="estilosFooter.COLOR_TEXT_TITULO">
+                                <h1><strong>{{marca}}</strong></h1>
                             </ion-label>
+                            <img class="imagen-logo" *ngIf="imagen !== ''" [src]="imagen" alt="">
                         </ion-col>
                         <ion-col size-lg="6" size-md="6" size-sm="6" size-xs="12">
                             <ion-row>
@@ -26,7 +27,7 @@
 
                             <ion-col size="12">
                                 <ion-label>
-                                    <p [style.color]="estilosFooter.COLOR_TEXT_CONTENIDO">Cali, Valle del Cauca Colombia</p>
+                                    <p [style.color]="estilosFooter.COLOR_TEXT_CONTENIDO">{{empresa.direccionEmpresa}}</p>
                                 </ion-label>
                             </ion-col>
 
@@ -43,7 +44,7 @@
                                         <ion-icon class="icon-redondos" [style.background]="estilosFooter.COLOR_TEXT_CONTENIDO" [style.color]="estilosFooter.COLOR_BACKGROUND" name="logo-whatsapp"></ion-icon>
                                         <ion-label>
                                             <p [style.color]="estilosFooter.COLOR_TEXT_CONTENIDO">
-                                                (+57) 123 456 7890
+                                                {{empresa.telefonoEmpresa}}
                                             </p>
                                         </ion-label>
                                     </ion-item>
@@ -53,7 +54,7 @@
                                         <ion-icon class="icon-redondos" [style.background]="estilosFooter.COLOR_TEXT_CONTENIDO" [style.color]="estilosFooter.COLOR_BACKGROUND" name="mail-outline"></ion-icon>
                                         <ion-label>
                                             <p [style.color]="estilosFooter.COLOR_TEXT_CONTENIDO">
-                                                promocionar@boletas.com
+                                                {{empresa.correoEmpresa}}
                                             </p>
                                         </ion-label>
                                     </ion-item>

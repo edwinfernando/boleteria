@@ -1,0 +1,19 @@
+<ion-content>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col class="sin-padding" *ngFor="let local of localidad" size="12" size-sm="12">
+                <ion-item mode="ios" button (click)="onClickSilla(local)" [detailIcon]="iconDetail(local)" lines="none" detail>
+                    <ion-label class="texto" [style.color]="estiloGeneral.COLOR_TEXT">{{local.zonaNombre}}</ion-label>
+                </ion-item>
+
+                <app-expandible expandHeight="auto" [expanded]="local.expanded">
+                    <ion-item class="icon-detail-size" *ngFor="let sector of local.sectores" button (click)="seleccionaCiudad(sector)" mode="md" lines="none">
+                        <ion-label class="texto-item" color="medium">
+                            <h6>{{sector.zonaNombre}}</h6>
+                        </ion-label>
+                    </ion-item>
+                </app-expandible>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

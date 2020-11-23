@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { GENERAL, BOTONES } from '../../../interfaces/interfaces';
+import { Component, Input, OnInit } from '@angular/core';
+import { GENERAL, BOTONES, Boleteria } from '../../../interfaces/interfaces';
 import { DataLocalService } from '../../../services/data-local.service';
 import { ModalController } from '@ionic/angular';
 import { ModalService } from '../../../services/modal.service';
 import { Router } from '@angular/router';
+import { UtilidadesService } from '../../../services/utilidades.service';
 
 @Component({
   selector: 'app-tu-pedido',
@@ -12,20 +13,10 @@ import { Router } from '@angular/router';
 })
 export class TuPedidoComponent implements OnInit {
 
-  items = [
-    {
-    boleta: 'VIP',
-    precio: '$210.000'
-    },
-    {
-      boleta: 'VIP',
-      precio: '$300.000'
-    },
-    {
-      boleta: 'Subtotal',
-      precio: '$510.000'
-    }
-  ];
+  @Input() lBoleteria: Boleteria[];
+  nombreEvento: string;
+  valorBoletas = 0;
+  factura = [];
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
     COLOR_BACKGROUND_SLIDES: '',
@@ -42,6 +33,7 @@ export class TuPedidoComponent implements OnInit {
   constructor(private dataLocal: DataLocalService,
               private modalCtlr: ModalController,
               private modalService: ModalService,
+              private utilService: UtilidadesService,
               private router: Router) { }
 
   ngOnInit() {
@@ -51,16 +43,42 @@ export class TuPedidoComponent implements OnInit {
         this.estiloBotones = resp.ESTILOS.BOTONES;
       }
     });
+
+    this.nombreEvento = this.lBoleteria[0].nombre;
+    this.lBoleteria.forEach( boleta => {
+      this.valorBoletas += boleta.valor;
+      console.log(boleta.valor);
+    });
+
+    console.log(this.valorBoletas);
+
+    this.factura = [
+      {
+      boleta: this.lBoleteria[0].localidad,
+      precio: this.formatearValor(this.valorBoletas)
+      },
+      {
+        boleta: 'Transacción',
+        precio: '$10.000'
+      },
+      {
+        boleta: 'Subtotal',
+        precio: this.formatearValor(this.valorBoletas + 10000)
+      }
+    ];
   }
 
   cancelar() {
     this.modalCtlr.dismiss();
+    this.modalService.openModalVerificarPedido(this.lBoleteria);
   }
 
   completarCompra() {
-    this.modalCtlr.dismiss();
-    this.router.navigateByUrl('/home', { skipLocationChange: true });
-    this.modalService.showAlert('¡Compra exitosa!', 'Te hemos enviado un correo electrónico con tu entrada y un mensaje de texto con tu PIN de acceso a tu celular.');
+    this.modalCtlr.dismiss(true);
+    this.router.navigateByUrl('/home', { skipLocationChange: false });
   }
 
+  formatearValor(valor: any){
+    return this.utilService.formatearNumeroMonedaDecimas(valor);
+  }
 }

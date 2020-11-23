@@ -17,6 +17,7 @@
     height: 20px;
     display: block;
     border-radius: 50%;
+    --border-radius: 50%;
     top: 0;
     transform: translateY(-50%);
 }
@@ -37,6 +38,7 @@ span {
     width: 70px;
     height: 70px;
     border-radius: 0px 15px 0px 0px;
+    --border-radius: 0px 15px 0px 0px;
     ;
 }
 
@@ -75,5 +77,6 @@ span {
     width: 70px;
     height: 70px;
     border-radius: 0px 0px 0px 15px;
+    --border-radius: 0px 0px 0px 15px;
     ;
 }

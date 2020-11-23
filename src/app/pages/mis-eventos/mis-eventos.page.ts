@@ -14,11 +14,27 @@ export class MisEventosPage implements OnInit {
   @Output() ajustarToolbar = new EventEmitter<boolean>();
   lBoleteria: Boleteria [] = [
     {
-      name: 'RollingStone',
+      nombre: 'Evento prueba',
+      valor: 30000,
+      eventoFechaInicio: '2020-11-30 03:00:00.0',
+      eventoCiudad: 'MEDELLIN',
+      eventoDepartamento: 'ANTIOQUIA',
+      eventoEscenario: 'Pascualito',
+      eventoDireccion: 'Calle 123, Falsa',
+      localidad: 'VIP',
+      silla: '5',
       expanded: false
     },
     {
-      name: 'RollingStone',
+      nombre: 'Evento prueba',
+      valor: 30000,
+      eventoFechaInicio: '2020-11-30 03:00:00.0',
+      eventoCiudad: 'MEDELLIN',
+      eventoDepartamento: 'ANTIOQUIA',
+      eventoEscenario: 'Pascualito',
+      eventoDireccion: 'Calle 123, Falsa',
+      localidad: 'VIP',
+      silla: '5',
       expanded: false
     }
   ];
@@ -57,7 +73,15 @@ export class MisEventosPage implements OnInit {
   verMasEventos(){
     for (let index = 0; index < 5; index++) {
       this.lBoleteria.unshift({
-        name: 'RollingStone',
+        nombre: 'Evento prueba',
+        valor: 30000,
+        eventoFechaInicio: '2020-11-30 03:00:00.0',
+        eventoCiudad: 'MEDELLIN',
+        eventoDepartamento: 'ANTIOQUIA',
+        eventoEscenario: 'Pascualito',
+        eventoDireccion: 'Calle 123, Falsa',
+        localidad: 'VIP',
+        silla: '5',
         expanded: false
       });
     }

@@ -1,0 +1,88 @@
+<app-toolbar-modal></app-toolbar-modal>
+
+<ion-content class="centrado no-scroll">
+    <form [formGroup]="editarForm" (ngSubmit)="onClickActualizarPerfil()">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-label [style.color]="estiloGeneral.COLOR_TEXT">
+                        <h1><strong>Editar cuenta</strong></h1>
+                    </ion-label>
+                </ion-col>
+                <ion-col size="12">
+                    <br>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="text" formControlName="nombre" autocomplete="off" (ionChange)="validarCampoChange('nombre')" (ionBlur)="validarCampo('nombre')" value="{{usuario.primerNombre}}"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isNombreValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="text" formControlName="nombreDos" autocomplete="off" value="{{usuario.segundoNombre}}" placeholder="Segundo Nombre"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="text" formControlName="apellido" value="{{usuario.apellidoUno}}" (ionChange)="validarCampoChange('apellido')" (ionBlur)="validarCampo('apellido')"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isApellidoValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="text" formControlName="apellidoDos" autocomplete="off" value="{{usuario.apellidoDos}}" placeholder="Segundo Apellido"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="item-select input-style" lines="none" mode="ios">
+                        <ion-select class="select" formControlName="tipoDocumento" value="{{usuario.tipoDocumento.codigo}}" (ionBlur)="validarCampo('tipoDocumento')" placeholder="Tipo de documento" interface="popover">
+                            <ion-select-option *ngFor="let tipoDocumento of listTipoDocumento" value="{{tipoDocumento.codigo}}" class="priMayuscula">{{tipoDocumento.nombreTipoDcoumento}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <span *ngIf="isTipoDocumentoValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="tel" maxlength="10" formControlName="numeroDocumento" value="{{usuario.documento}}" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isNumeroDocumentoValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" value="{{usuario.correo}}" placeholder="Correo electronico"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isCorreoValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="tel" maxlength="10" formControlName="celular" (ionChange)="validarCampoChange('celular')" (ionBlur)="validarCampo('celular')" value="{{usuario.celular}}" placeholder="Celular" pattern="^[0-9]*$"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isCelularValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>
+                <!--<ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="password" formControlName="contrasena" (ionBlur)="validarCampo('contrasena')" placeholder="Contraseña"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isContrasenaValido" class="requerido">Campo vacio o invalido</span>
+                </ion-col>-->
+
+                <!--<ion-col size="12">
+                    <ion-item lines="none" mode="ios">
+                        <ion-checkbox formControlName="checkTerminos" slot="start"></ion-checkbox>
+                        <ion-label><small><div [innerHtml]="terminos"></div></small></ion-label>
+                    </ion-item>
+                </ion-col>-->
+
+                <ion-col size="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" [disabled]="editarForm.invalid" type="submit" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>Actualizar cuenta</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

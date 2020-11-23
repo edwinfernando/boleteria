@@ -54,6 +54,7 @@
 
 .border-radius {
     border-radius: 1em;
+    --border-radius: 1em;
 }
 
 .virtual {
@@ -61,11 +62,13 @@
     right: 20px;
     top: 140px;
     border-radius: 1em;
+    --border-radius: 1em;
 }
 
 .icon-redondos {
     padding: 5px;
     border-radius: 50%;
+    --border-radius: 1em;
     margin-right: 10px;
     color: #ffffff;
 }
@@ -95,6 +98,14 @@
 
 .priMayuscula::first-letter {
     text-transform: uppercase;
+}
+
+.select-text {
+    text-transform: lowercase !important;
+}
+
+.select-text::first-letter {
+    text-transform: uppercase !important;
 }
 
 .popover-content {
@@ -176,8 +187,21 @@
     color: #FFFFFF;
 }
 
-.popover-class-paises {
-    --width: 300px;
+.popover-class-localidad {
+    --width: 200px;
+    .popover-content {
+        width: 300px !important;
+    }
+}
+
+.popover-class-silleteria {
+    --backdrop-opacity: 0.2;
+    .popover-content {
+        position: inherit;
+    }
+    .popover-arrow {
+        visibility: hidden;
+    }
 }
 
 .color-gris {
@@ -263,8 +287,29 @@ ion-spinner {
     --border-radius: 1em;
 }
 
+.modal-class-verificar-pedido {
+    --height: 650px !important;
+    --backdrop-opacity: 0.3;
+    --width: 95vw;
+    --border-radius: 1em;
+}
+
 .modal-class-iniciar-sesion {
     --height: 470px !important;
+    --backdrop-opacity: 0.3;
+    --width: 350px;
+    --border-radius: 1em;
+}
+
+.modal-class-recuperar-contrasena {
+    --height: 280px !important;
+    --backdrop-opacity: 0.3;
+    --width: 350px;
+    --border-radius: 1em;
+}
+
+.modal-class-cambiar-contrasena {
+    --height: 330px !important;
     --backdrop-opacity: 0.3;
     --width: 350px;
     --border-radius: 1em;
@@ -279,6 +324,13 @@ ion-spinner {
 
 .modal-class-registrate {
     --height: 650px !important;
+    --backdrop-opacity: 0.3;
+    --width: 350px;
+    --border-radius: 1em;
+}
+
+.modal-class-editar-perfil {
+    --height: 570px !important;
     --backdrop-opacity: 0.3;
     --width: 350px;
     --border-radius: 1em;
@@ -358,6 +410,9 @@ ion-spinner {
         white-space: pre-line !important;
         margin: 0px;
     }
+    ion-input {
+        text-transform: uppercase;
+    }
 }
 
 ion-item {
@@ -406,4 +461,19 @@ ion-item {
 
 .border-left {
     border-left: 1px solid rgba($color: #000000, $alpha: 0.3);
+}
+
+
+/* datetime */
+
+.datetime-class {
+    .picker-wrapper {
+        bottom: 28vh !important;
+        width: 300px;
+        border-radius: 1em;
+    }
+    .picker-toolbar {
+        position: absolute;
+        bottom: 0px;
+    }
 }

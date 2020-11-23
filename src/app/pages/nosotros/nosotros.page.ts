@@ -25,7 +25,9 @@ export class NosotrosPage implements OnInit {
     COLOR_TEXT_DESCRIPCION: ''
   };
   constructor(private dataService: DataService,
-              private dataLocal: DataLocalService) { }
+              private dataLocal: DataLocalService) {
+    this.dataLocal.setPage('nosotros');
+  }
 
   async ngOnInit() {
     await this.dataLocal.cargarConfiguracion().then( resp => {

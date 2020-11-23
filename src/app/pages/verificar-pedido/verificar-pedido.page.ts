@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Boleteria, GENERAL, BOTONES, EVENTODISPONIBLE } from '../../interfaces/interfaces';
+import { Component, Input, OnInit } from '@angular/core';
+import { Boleteria, GENERAL, BOTONES, EVENTODISPONIBLE, DETALLEUSUARIO, SILLAS } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { ModalController, NavController } from '@ionic/angular';
 import { ModalService } from '../../services/modal.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UtilidadesService } from '../../services/utilidades.service';
 
 @Component({
   selector: 'app-verificar-pedido',
@@ -12,20 +13,24 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class VerificarPedidoPage implements OnInit {
 
-  evento: EVENTODISPONIBLE;
+ //  @Input() evento: EVENTODISPONIBLE;
+  // @Input() zona: any;
+ // @Input() sillas: SILLAS[] = [];
+ // @Input() numeroSillas: number;
+
   descripcion = '¿Aún no tienes una cuentas en BoletasWeb?. Crear una cuenta te permite acceder a des- cuentos especiales, enterarte de futuros eventos entes que otras personas y facilita tu proceso de compra.';
   isChecked: any;
-  lBoleteria: Boleteria [] = [
-    {
-      name: 'RollingStone',
-      expanded: false
-    },
-    {
-      name: 'RollingStone',
-      expanded: false
-    }
-  ];
+  @Input() lBoleteria: Boleteria [] = [];
   isLogueado = false;
+  detalleUsuario: DETALLEUSUARIO = {
+    idUsuario: '',
+    usuarioNombreLogin: '',
+    usuarioNombrePersona: '',
+    usuarioEmail: '',
+    usuarioCelular: '',
+    usuarioIniciales: '',
+    usuarioDocumento: ''
+  };
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
     COLOR_BACKGROUND_SLIDES: '',
@@ -43,7 +48,9 @@ export class VerificarPedidoPage implements OnInit {
   constructor(private dataLocal: DataLocalService,
               private navCtrl: NavController,
               private modalService: ModalService,
-              private activeRouter: ActivatedRoute) { }
+              private activeRouter: ActivatedRoute,
+              private modalCtrl: ModalController,
+              private utilService: UtilidadesService) { }
 
   ngOnInit() {
     this.dataLocal.cargarConfiguracion().then( resp => {
@@ -53,8 +60,45 @@ export class VerificarPedidoPage implements OnInit {
       }
     });
 
-    this.activeRouter.queryParams.subscribe( resp => {
-      this.evento = JSON.parse(resp.evento);
+    this.getDetalleUsuario();
+    //this.ordenarBoleteria();
+  }
+
+ /* ordenarBoleteria(){
+    if (this.sillas.length > 0){
+      this.sillas = this.sillas.filter( silla => silla.selected);
+
+    }
+
+    for (let index = 0; index < this.numeroSillas; index++) {
+      let silla = '';
+      if (this.sillas.length > 0){
+        silla = this.sillas[index].silla.silleteriaNombre;
+      }
+      const boleta: Boleteria = {
+        nombre: this.evento.eventoNombre,
+        valor: this.zona.zonaValor,
+        eventoFechaInicio: this.evento.eventoFechaInicio,
+        eventoCiudad: this.evento.eventoCiudad,
+        eventoDepartamento: this.evento.eventoDepartamento,
+        eventoEscenario: this.evento.eventoEscenario,
+        eventoDireccion: this.evento.eventoDireccion,
+        localidad: this.zona.zonaNombre,
+        silla,
+        expanded: false
+      };
+      this.lBoleteria.push(boleta);
+    }
+  }*/
+
+  async getDetalleUsuario(){
+    await this.dataLocal.getLogin().then(resp => {
+      if (resp !== false){
+        this.isLogueado = true;
+        this.detalleUsuario = resp;
+      } else {
+        this.isLogueado = false;
+      }
     });
   }
 
@@ -65,14 +109,26 @@ export class VerificarPedidoPage implements OnInit {
   }
 
   closeModal() {
-    this.navCtrl.pop();
+    // this.navCtrl.pop();
+    this.modalCtrl.dismiss();
   }
 
-  completarCompra() {
-    this.modalService.openModalTuPedido();
+  async completarCompra() {
+    this.modalCtrl.dismiss();
+    const data = await this.modalService.openModalTuPedido(this.lBoleteria);
+    console.log(data);
   }
 
-  openModalRegistrate(){
-    this.modalService.openModalRegistrate();
+  async openModalRegistrate(){
+    const result = await this.modalService.openModalRegistrate(this.modalCtrl, false);
+    console.log(result);
+
+    if (result){
+      this.getDetalleUsuario();
+    }
+  }
+
+  formatearValor(valor: any){
+    return this.utilService.formatearNumeroMonedaDecimas(valor);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GENERAL, BOTONES } from '../../../interfaces/interfaces';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { DataLocalService } from '../../../services/data-local.service';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,8 @@ export class CerrarSesionComponent implements OnInit {
   };
   constructor(private modalCtrl: ModalController,
               private dataLocal: DataLocalService,
-              private router: Router) { }
+              private router: Router,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
     this.dataLocal.cargarConfiguracion().then( resp => {
@@ -39,15 +40,23 @@ export class CerrarSesionComponent implements OnInit {
     });
   }
 
-  onClickAceptar(){
+  async onClickAceptar(){
     this.modalCtrl.dismiss(true);
-    this.dataLocal.setLogin(null);
-    this.router.navigateByUrl('/home', {
-       replaceUrl: true,
+    await this.dataLocal.setLogin(null);
+    /*this.navCtrl.navigateForward('/', {
+      replaceUrl: true,
+      skipLocationChange: false,
+   });*/
+    // const url: string = this.router.url.substring(0, this.router.url.indexOf('?'));
+     // console.log(url);
+    /*this.router.navigate(['/home'], {
+       replaceUrl: false,
+       skipLocationChange: true,
        queryParams: {
          closeSesion: true
        }
-    });
+    });*/
+    location.reload();
   }
 
   onClickCancelar(){

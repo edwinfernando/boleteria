@@ -17,6 +17,7 @@ import { UtilidadesService } from '../../../services/utilidades.service';
 export class IniciarSesionComponent implements OnInit {
 
   marca = 'Marca blanca';
+  isLogueado = false;
   descripcion = 'Crear una cuenta te permite acceder a descuentos especiales, enterarse de futuros eventos antes que otras personas y facilita tu proceso de compra.';
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
@@ -61,6 +62,7 @@ export class IniciarSesionComponent implements OnInit {
       if ( resp.ESTILOS !== undefined) {
         this.estiloGeneral = resp.ESTILOS.GENERAL;
         this.estiloBotones = resp.ESTILOS.BOTONES;
+        this.marca = resp.MARCA;
       }
     });
   }
@@ -82,22 +84,41 @@ export class IniciarSesionComponent implements OnInit {
           // this.router.navigateByUrl('/home', { skipLocationChange: true });
         }).catch( resp => {
           this.utilService.dissmisLoading();
-          this.modalService.showAlert('Algo salio mal', resp);
+          this.utilService.showAlert('Algo salio mal', resp);
         });
   }
 
-  openModalRegistrate(){
-    this.modalCtlr.dismiss(
-      false
-    );
-    this.modalService.openModalRegistrate();
+  async openModalRecuperarContrasena(){
+    const result = await this.modalService.openModalRecuperarContrasena();
+    this.modalCtlr.dismiss(result);
+  }
+
+  async openModalRegistrate(){
+    const result = await this.modalService.openModalRegistrate(this.modalCtlr, true);
+    this.modalCtlr.dismiss(result);
   }
 
   validarCampo(event) {
     if (event === 'correo') {
-      this.isCorreoValido = this.loginForm.controls.correo.invalid;
+      if (this.loginForm.value.correo !== ''){
+        this.isCorreoValido = this.loginForm.controls.correo.invalid;
+      }
     }else {
-      this.isPasswordValido = this.loginForm.controls.contrasena.invalid;
+      if (this.loginForm.value.contrasena !== ''){
+        this.isPasswordValido = this.loginForm.controls.contrasena.invalid;
+      }
+    }
+  }
+
+  validarCampoChange(event){
+    if (event === 'correo') {
+      if (this.loginForm.value.correo === ''){
+        this.isCorreoValido = false;
+      }
+    }else {
+      if (this.loginForm.value.contrasena === ''){
+        this.isPasswordValido = false;
+      }
     }
   }
 }

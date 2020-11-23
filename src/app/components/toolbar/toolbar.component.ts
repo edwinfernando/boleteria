@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TOOLBAR, BOTONES } from '../../interfaces/interfaces';
-import { PopoverController, ModalController, MenuController } from '@ionic/angular';
-import { PaisesComponent } from '../modals/paises/paises.component';
+import { MenuController } from '@ionic/angular';
+// import { PaisesComponent } from '../modals/paises/paises.component';
 import { DataLocalService } from '../../services/data-local.service';
 import { Router } from '@angular/router';
 import { ModalService } from '../../services/modal.service';
@@ -20,9 +20,12 @@ export class ToolbarComponent implements OnInit {
     isChecked: false,
     image: '/assets/flat/col.png',
   };
-  popoverPais;
   seccion;
-  isLogueado = false;
+  marca: string;
+  imagen: string;
+  @Input() isLogueado = false;
+  @Input() page = '';
+  replace = true;
   iniciales = '';
   estiloToolbar: TOOLBAR = {
     COLOR_BACKGROUND: '',
@@ -37,17 +40,20 @@ export class ToolbarComponent implements OnInit {
     COLOR_TEXT: ''
   };
 
-  constructor(private popoverController: PopoverController,
-              private modalService: ModalService,
+  constructor(private modalService: ModalService,
               private router: Router,
               private menuController: MenuController,
-              private dataLocal: DataLocalService) { }
+              private dataLocal: DataLocalService) {
+                this.getDetalleUsuario();
+              }
 
   async ngOnInit() {
     await this.dataLocal.cargarConfiguracion().then( resp => {
       if ( resp.ESTILOS !== undefined) {
         this.estiloToolbar = resp.ESTILOS.TOOLBAR;
         this.estiloBotones = resp.ESTILOS.BOTONES;
+        this.marca = resp.MARCA;
+        this.imagen = resp.IMAGEN;
       }
     });
 
@@ -59,34 +65,34 @@ export class ToolbarComponent implements OnInit {
   }
 
   gotoHome() {
-    this.router.navigate(['/home']);
+    this.router.navigateByUrl('/home', {
+      replaceUrl: true,
+      skipLocationChange: false,
+   });
   }
 
   gotoMiPerfil() {
-    this.router.navigate(['/mi-perfil']);
-  }
+    if (this.page === 'evento') {
+      this.replace = this.isLogueado;
+    }
 
-  async seleccionarPais(ev: any) {
-    this.popoverPais = await this.popoverController.create({
-      component: PaisesComponent,
-      componentProps: {
-        // tarjeta: JSON.stringify(this.tarjeta)
-      },
-      cssClass: 'popover-class-paises',
-      event: ev,
-      translucent: true,
-      mode: 'ios',
-    });
-    return await this.popoverPais.present();
+    console.log(this.replace);
+    this.router.navigate(['/mi-perfil'], {
+    //  replaceUrl: this.replace,
+   });
   }
 
   closePopOverPais(){
     // this.popoverPais.dismiss();
   }
 
-  openModalRegistrate(){
-    this.modalService.openModalRegistrate();
-  }
+  /*async openModalRegistrate(){
+    const result = await this.modalService.openModalRegistrate();
+    this.isLogueado = result;
+    console.log('Auwi', this.isLogueado);
+
+    this.getDetalleUsuario();
+  }*/
 
   async openModalIniciarSesion(){
     const result = await this.modalService.openModalIniciarSesion();
@@ -98,6 +104,7 @@ export class ToolbarComponent implements OnInit {
   async getDetalleUsuario(){
     await this.dataLocal.getLogin().then(resp => {
       if (resp !== false){
+        // console.log(resp);
         this.isLogueado = true;
         this.iniciales = resp.usuarioIniciales;
       }

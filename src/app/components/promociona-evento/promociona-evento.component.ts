@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GENERAL, BOTONES } from '../../interfaces/interfaces';
+import { GENERAL, BOTONES, EMPRESA } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
@@ -8,6 +8,15 @@ import { DataLocalService } from '../../services/data-local.service';
   styleUrls: ['./promociona-evento.component.scss'],
 })
 export class PromocionaEventoComponent implements OnInit {
+
+  empresa: EMPRESA = {
+    nombreEmpresa: '',
+    nitEmpresa: '',
+    estadoEmpresa: '',
+    correoEmpresa: '',
+    telefonoEmpresa: '',
+    direccionEmpresa: ''
+  };
 
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
@@ -30,6 +39,10 @@ export class PromocionaEventoComponent implements OnInit {
         this.estiloGeneral = resp.ESTILOS.GENERAL;
         this.estiloBotones = resp.ESTILOS.BOTONES;
       }
+    });
+
+    this.dataLocal.cargarEmpresa().then( resp => {
+      this.empresa = resp;
     });
   }
 

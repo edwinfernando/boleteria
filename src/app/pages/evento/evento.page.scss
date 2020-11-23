@@ -9,7 +9,7 @@
     }
     
     .tamano-slide {
-        height: 40vw;
+        height: 40vh;
         background-size: cover;
         box-shadow: inset 0 0 100px #000000;
         background-position: top;
@@ -70,6 +70,7 @@
         background: azure;
         z-index: 10;
         border-radius: 0.5em;
+        --border-radius: 0.5em;
     }
     
     .swiper-button-next {
@@ -88,10 +89,12 @@
     .contador {
         background: #e1e1e1;
         border-radius: 1em;
+        --border-radius: 1em;
     }
     
     .select {
         border-radius: 0.5em;
+        --border-radius: 0.5em;
         --placeholder-opacity: 1;
         .select-icon {
             width: 0px !important;
@@ -102,15 +105,37 @@
         padding-top: 5px;
         // padding-bottom: 12px;
         --border-radius: 10px;
+        --border-radius: 10px;
     }
     
     .videoPlayer {
         width: 80%;
+        height: 34vw;
         border-radius: 1em;
+        --border-radius: 1em;
     }
     
     .image-galery {
         width: 100%;
         height: 170px;
         background-size: cover;
+    }
+    
+    .item-restriciones {
+        height: 30px;
+        ion-label {
+            padding: 0;
+        }
+    }
+    
+    .image-mapa {
+        width: 80%;
+        height: 50vw;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    
+    .galeria {
+        margin: auto;
     }

@@ -63,8 +63,26 @@
 
 .select {
     border-radius: 0.5em;
+    --border-radius: 0.5em;
     --placeholder-opacity: 1;
     .select-icon {
         width: 0px !important;
+    }
+}
+
+.fecha {
+    padding-bottom: 8px;
+    font-size: 13.8px;
+}
+
+.icon-fecha {
+    width: 13px;
+    opacity: 0.4;
+}
+
+.centrar-icono {
+    ion-icon {
+        margin-top: 15px;
+        cursor: pointer;
     }
 }

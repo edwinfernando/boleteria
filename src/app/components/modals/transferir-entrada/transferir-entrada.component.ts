@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GENERAL, BOTONES } from '../../../interfaces/interfaces';
 import { DataLocalService } from '../../../services/data-local.service';
-import { ModalService } from '../../../services/modal.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { UtilidadesService } from '../../../services/utilidades.service';
 
 @Component({
   selector: 'app-transferir-entrada',
@@ -29,7 +29,7 @@ export class TransferirEntradaComponent implements OnInit {
     COLOR_TEXT: ''
   };
   constructor(private dataLocal: DataLocalService,
-              private modalService: ModalService,
+              private utilService: UtilidadesService,
               private modalCtrl: ModalController,
               private router: Router) { }
 
@@ -56,7 +56,7 @@ export class TransferirEntradaComponent implements OnInit {
     this.modalCtrl.dismiss();
     this.router.navigate(['/mi-perfil']);
    // this.modalService.showAlert('Transferencia exitosa!', this.nombre + ' recibió tu entrada.');
-    this.modalService.showAlert('Transferencia exitosa!', 'Espera que la persona a la que le enviaste la entrada acepte. Recibirás una notificación de confirmación. \n *En caso de no aceptar la entrada volverá a ti.');
+    this.utilService.showAlert('Transferencia exitosa!', 'Espera que la persona a la que le enviaste la entrada acepte. Recibirás una notificación de confirmación. \n *En caso de no aceptar la entrada volverá a ti.');
 
   }
 }

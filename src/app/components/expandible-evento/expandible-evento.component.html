@@ -1,17 +1,37 @@
 <ion-grid fixed>
     <ion-row>
+        <ion-col *ngIf="notificacion.evento !== ''" size="12">
+            <ion-item class="item-style background-gris" mode="md" lines="none">
+                <ion-label [style.color]="estiloGeneral.COLOR_TEXT" slot="start">{{notificacion.evento}}</ion-label>
+                <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT" slot="end">{{notificacion.valor}}</ion-label>
+            </ion-item>
+        </ion-col>
         <ion-col size="6">
             <ion-row>
                 <ion-col size="12">
                     <ion-item class="item-style background-gris" mode="md" lines="none">
                         <ion-icon class="icon-redondos" name="calendar-outline" color="medium"></ion-icon>
-                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Miércoles 01 de oct., 2021</ion-label>
+                        <ion-label class="label-descripcion">
+                            <p [style.color]="estiloGeneral.COLOR_TEXT" class="priMayuscula" s>
+                                {{boleta.eventoFechaInicio | date: 'EEEE,'}}
+                            </p>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                {{boleta.eventoFechaInicio | date: 'dd MMMM, yyyy'}}
+                            </p>
+                        </ion-label>
                     </ion-item>
                 </ion-col>
                 <ion-col size="12">
                     <ion-item class="item-style background-gris" mode="md" lines="none">
                         <ion-icon class="icon-redondos" name="time-outline" color="medium"></ion-icon>
-                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Hora: 02:00 p.m.</ion-label>
+                        <ion-label class="label-descripcion">
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                Inicio del evento:
+                            </p>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                {{boleta.eventoFechaInicio | date: 'h:mm a'}}
+                            </p>
+                        </ion-label>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -21,13 +41,27 @@
                 <ion-col size="12">
                     <ion-item class="item-style background-gris" mode="md" lines="none">
                         <ion-icon class="icon-redondos" name="location-outline" color="medium"></ion-icon>
-                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Plaza de Toros, Cra. 56 #3-156 </ion-label>
+                        <ion-label class="label-descripcion">
+                            <p [style.color]="estiloGeneral.COLOR_TEXT" class="priMayuscula">
+                                {{boleta.eventoEscenario}},
+                            </p>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT" class="priMayuscula">
+                                {{boleta.eventoDireccion}}
+                            </p>
+                        </ion-label>
                     </ion-item>
                 </ion-col>
                 <ion-col size="12">
                     <ion-item class="item-style background-gris" mode="md" lines="none">
                         <ion-icon class="icon-redondos" name="location-outline" color="medium"></ion-icon>
-                        <ion-label class="texto-con-icono" [style.color]="estiloGeneral.COLOR_TEXT">Cali, Valle del Cauca </ion-label>
+                        <ion-label class="label-descripcion">
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                {{boleta.eventoCiudad | titlecase}},
+                            </p>
+                            <p [style.color]="estiloGeneral.COLOR_TEXT">
+                                {{boleta.eventoDepartamento | titlecase}}
+                            </p>
+                        </ion-label>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -37,12 +71,12 @@
         </ion-col>
         <ion-col size="6">
             <ion-item lines="none">
-                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Localidad: VIP</ion-label>
+                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Localidad: {{boleta.localidad}}</ion-label>
             </ion-item>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="6" *ngIf="boleta.silla !== ''">
             <ion-item lines="none">
-                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Silla: N-1</ion-label>
+                <ion-label [style.color]="estiloGeneral.COLOR_TEXT">Silla: {{boleta.silla}}</ion-label>
             </ion-item>
         </ion-col>
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { DataLocalService } from '../../services/data-local.service';
 import { BOTONES } from '../../interfaces/interfaces';
 
@@ -10,6 +10,8 @@ import { BOTONES } from '../../interfaces/interfaces';
 })
 export class ToolbarModalComponent implements OnInit {
 
+  @Input() isPopOver = false;
+
   estiloBotones: BOTONES = {
     COLOR_BACKGROUND_B_ACCESO: '',
     COLOR_BACKGROUND_B_PIN: '',
@@ -17,7 +19,8 @@ export class ToolbarModalComponent implements OnInit {
     COLOR_TEXT: ''
   };
 
-  constructor(private modalController: ModalController,
+  constructor(private modalCtrl: ModalController,
+              private popCtrl: PopoverController,
               private dataLocal: DataLocalService) { }
 
   ngOnInit() {
@@ -29,6 +32,12 @@ export class ToolbarModalComponent implements OnInit {
   }
 
   closeModal() {
-    this.modalController.dismiss();
+    if (this.isPopOver) {
+      this.popCtrl.dismiss();
+    } else {
+      this.modalCtrl.dismiss(
+        false
+      );
+    }
   }
 }

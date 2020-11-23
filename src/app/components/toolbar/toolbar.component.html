@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
     <ion-toolbar class="toolbar" [style.--background]="estiloToolbar.COLOR_BACKGROUND" [style.color]="estiloToolbar.COLOR_TEXT">
         <ion-buttons slot="start">
-            <ion-item class="transparent" [style.color]="estiloToolbar.COLOR_TEXT" lines="none">
-                <ion-label button (click)="gotoHome()"><strong>Marca Blanca</strong></ion-label>
+            <ion-item class="transparent cursor" button (click)="gotoHome()" [style.color]="estiloToolbar.COLOR_TEXT" lines="none">
+                <ion-label *ngIf="imagen === ''"><strong>{{marca}}</strong></ion-label>
+                <img class="imagen-logo" *ngIf="imagen !== ''" [src]="imagen" alt="">
             </ion-item>
         </ion-buttons>
         <ion-buttons slot="end">
@@ -13,7 +14,7 @@
 
             <ion-item *ngIf="isLogueado" class="transparent" [style.color]="estiloToolbar.COLOR_TEXT" lines="none" mode="ios">
                 <ion-avatar class="cursor" slot="end" [style.background]="estiloToolbar.COLOR_TEXT" button (click)="gotoMiPerfil()">
-                    <ion-label [style.color]="estiloToolbar.COLOR_BACKGROUND" class="iniciales">EM</ion-label>
+                    <ion-label [style.color]="estiloToolbar.COLOR_BACKGROUND" class="iniciales">{{iniciales}}</ion-label>
                 </ion-avatar>
                 <ion-label class="label-mi-perfil" button (click)="gotoMiPerfil()">Mi perfil</ion-label>
             </ion-item>

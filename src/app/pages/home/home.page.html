@@ -1,4 +1,4 @@
-<app-toolbar></app-toolbar>
+<app-toolbar [isLogueado]="isLogueado" [page]="'home'"></app-toolbar>
 
 <ion-content #content [fullscreen]="true" [style.--background]="estiloGeneral.COLOR_BACKGROUND_GENERAL">
     <!--<ion-grid fixed>-->
@@ -8,39 +8,38 @@
     <ion-grid class="grid-buscar" fixed>
         <ion-grid fixed>
             <ion-row class="border-radius" [style.background]="estiloToolbar.COLOR_BACKGROUND_SEARCH">
-                <ion-col class="sin-padding" size-lg="6" size-md="6" size-sm="12" size-xs="12">
-                    <ion-searchbar class="toolbar-buscar" [style.color]="estiloGeneral.COLOR_TEXT" [style.--placeholder-color]="estiloGeneral.COLOR_TEXT" search-icon="false" placeholder="Buscar evento o artista" [debounce]="700" [value]="textoBuscar" (ionChange)="buscar($event)"
+                <ion-col class="sin-padding" [sizeLg]="mostrarLimpiarSize()" [sizeMd]="mostrarLimpiarSize()" size-sm="12" size-xs="12">
+                    <ion-searchbar class="toolbar-buscar" [style.color]="estiloGeneral.COLOR_TEXT" [style.--placeholder-color]="estiloGeneral.COLOR_TEXT" search-icon="false" placeholder="Buscar evento" [debounce]="700" [value]="textoBuscar" (ionChange)="buscarPorNombre($event)"
                         animated [debounce]="700" mode="ios"></ion-searchbar>
                 </ion-col>
-                <ion-col class="sin-padding" size-lg="6" size-md="6" size-sm="12" size-xs="12">
+                <ion-col class="sin-padding" size-lg="6" size-md="6" [sizeSm]="mostrarLimpiarSizeM()" [sizeXs]="mostrarLimpiarSizeM()">
                     <ion-row>
                         <ion-col size="4">
                             <ion-item class="item-select item-style" lines="none" mode="ios">
-                                <ion-select class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Categorias" [interfaceOptions]="customPopoverOptions" interface="popover">
-                                    <ion-select-option value="f">Female</ion-select-option>
-                                    <ion-select-option value="m">Male</ion-select-option>
+                                <ion-select #categoria class="select text-capitalize" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Categorias" interface="popover" mode="ios" (ionChange)="buscarPorCategoria($event)">
+                                    <ion-select-option *ngFor="let categoria of listCategorias" [value]="categoria.idCategoria" class="priMayuscula">{{categoria.nombreCategoria}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </ion-col>
                         <ion-col size="4">
                             <ion-item class="item-select item-style" lines="none" mode="ios">
-                                <ion-select class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Ciudad" [interfaceOptions]="customPopoverOptions" interface="popover">
-                                    <ion-select-option value="f">Female</ion-select-option>
-                                    <ion-select-option value="m">Male</ion-select-option>
+                                <ion-select #ciudad class="select text-capitalize" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Ciudad" interface="popover" mode="ios" (ionChange)="buscarPorCiudad($event)">
+                                    <ion-select-option *ngFor="let ciudad of listCiudades" [value]="ciudad.codigo" class="priMayuscula">{{ciudad.nombreCiudad}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </ion-col>
                         <ion-col size="4">
                             <ion-item class="item-select item-style" lines="none" mode="ios">
-                                <ion-select class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Fecha" [interfaceOptions]="customPopoverOptions" interface="popover">
-                                    <ion-select-option value="f">Female</ion-select-option>
-                                    <ion-select-option value="m">Male</ion-select-option>
-                                </ion-select>
+                                <ion-datetime #fecha class="fecha" placeholder="Fecha" [pickerOptions]="customPickerOptions" [style.color]="estiloGeneral.COLOR_TEXT" [style.--placeholder-color]="estiloGeneral.COLOR_TEXT" cancelText="Cancelar" doneText="Seleccionar" displayFormat="DD MMM YYYY"
+                                    [min]="fechaMinima" [monthShortNames]="meses" value="fecha" (ionChange)="buscarPorFecha($event)"></ion-datetime>
+                                <ion-icon class="icon-fecha" [style.color]="estiloGeneral.COLOR_TEXT" slot="end" name="caret-down-outline"></ion-icon>
                             </ion-item>
                         </ion-col>
                     </ion-row>
                 </ion-col>
-
+                <ion-col *ngIf="mostrarLimpiar()" size="1" class="ion-text-center centrar-icono">
+                    <ion-icon [style.color]="estiloGeneral.COLOR_TEXT" button (click)="limpiarFiltro()" name="trash-bin-outline"></ion-icon>
+                </ion-col>
 
             </ion-row>
 
@@ -60,7 +59,7 @@
                     <app-item-evento *ngIf="evento.eventoTipoEventoId === 1" [evento]="evento"></app-item-evento>
                     <app-item-evento-dos *ngIf="evento.eventoTipoEventoId !== 1" [evento]="evento"></app-item-evento-dos>
                 </ion-col>
-                <ion-col class="col-button-acceso centrado" size="12">
+                <!--<ion-col class="col-button-acceso centrado" size="12">
                     <ion-button [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" size="small" fill="clear" (click)="getCargarEventos()" mode="ios">
                         <ion-text>
                             <h6>Ver más eventos</h6>
@@ -69,7 +68,7 @@
                 </ion-col>
                 <ion-col class="centrado" size="12">
                     <ion-icon name="chevron-down-outline"></ion-icon>
-                </ion-col>
+                </ion-col>-->
             </ion-row>
 
         </ion-list>

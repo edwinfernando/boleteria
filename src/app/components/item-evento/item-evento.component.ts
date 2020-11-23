@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Evento, EVENTOS, BOTONES, EVENTODISPONIBLE } from '../../interfaces/interfaces';
+import { EVENTOS, BOTONES, EVENTODISPONIBLE } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { ModalController } from '@ionic/angular';
 
@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ItemEventoComponent implements OnInit {
 
+  /* 128 = presencial, 219 = virtual y 130=presencial y virtual */
   @Input() evento: EVENTODISPONIBLE;
   estiloEvento: EVENTOS = {
     COLOR_BACKGROUND: '',
@@ -38,14 +39,12 @@ export class ItemEventoComponent implements OnInit {
         this.estiloBotones = resp.ESTILOS.BOTONES;
       }
     });
-
-    console.log(this.evento);
   }
 
   verEvento() {
     this.router.navigate(['/evento'], {
       queryParams: {
-        evento: JSON.stringify(this.evento)
+        evento: this.evento.eventoId
       }
     });
   }
@@ -53,7 +52,7 @@ export class ItemEventoComponent implements OnInit {
   comprarAcceso() {
     this.router.navigate(['/evento'], {
       queryParams: {
-        evento: JSON.stringify(this.evento),
+        evento: this.evento.eventoId,
         isComprar: true
       }
     });

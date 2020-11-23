@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Categoria, GENERAL } from '../../interfaces/interfaces';
+import { GENERAL, Patrocinadores } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
-  selector: 'app-item-categoria',
-  templateUrl: './item-categoria.component.html',
-  styleUrls: ['./item-categoria.component.scss'],
+  selector: 'app-item-patrocinador',
+  templateUrl: './item-patrocinador.component.html',
+  styleUrls: ['./item-patrocinador.component.scss'],
 })
-export class ItemCategoriaComponent implements OnInit {
+export class ItemPatrocinadorComponent implements OnInit {
 
-  @Input() categoria: Categoria;
+  @Input() patrocinador: Patrocinadores;
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '#FFFFFF',
     COLOR_BACKGROUND_SLIDES: '#FFFFFF',

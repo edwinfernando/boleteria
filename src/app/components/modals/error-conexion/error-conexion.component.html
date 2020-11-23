@@ -1,0 +1,20 @@
+<ion-content class="transparent">
+    <ion-slides class="slide-error" mode="ios" pager="false" scrollbar="false">
+        <ion-slide>
+
+            <ion-row>
+                <ion-col size="12">
+                    <img src="/assets/error.png" alt="">
+                    <p>Se presento un error en la conexión con el servidor. Por favor refresque la página.</p>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-button class="button-acceso button-acceso-margin" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="onClickRefrescar()" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>Refrescar</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

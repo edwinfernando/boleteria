@@ -12,6 +12,7 @@ export class AlertaComponent implements OnInit {
 
   @Input() titulo = 'Algo salio mal';
   @Input() mensaje;
+  marca: string;
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
     COLOR_BACKGROUND_SLIDES: '',
@@ -33,6 +34,7 @@ export class AlertaComponent implements OnInit {
       if ( resp.ESTILOS !== undefined) {
         this.estiloGeneral = resp.ESTILOS.GENERAL;
         this.estiloBotones = resp.ESTILOS.BOTONES;
+        this.marca = resp.MARCA;
       }
     });
   }

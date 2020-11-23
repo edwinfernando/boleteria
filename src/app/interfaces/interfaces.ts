@@ -5,33 +5,6 @@ export interface Slide {
     type: number;
   }
 
-export interface Evento {
-  id: string;
-  image: string[];
-  nameEvent: string;
-  description: string;
-  price: string;
-  dollars: string;
-  date: string;
-  favorite: number;
-  gInformation: InformacionGeneral[];
-  lExperences: Experiencia[];
-  tipo: number;
-  isVirtual: boolean;
-  isAgotado: boolean;
-}
-
-export interface InformacionGeneral {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-export interface Experiencia {
-  title: string;
-  lDescriptions: string[];
-}
-
 export interface Categoria {
     id: string;
     image: string;
@@ -63,12 +36,23 @@ export interface Menu {
 
 
 export interface Boleteria {
-  name: string;
+  nombre: string;
+  valor: number;
+  eventoFechaInicio: string;
+  eventoCiudad: string;
+  eventoDepartamento: string;
+  eventoEscenario: string;
+  eventoDireccion: string;
+  localidad: string;
+  silla: string;
   expanded: boolean;
 }
 
 export interface Notificacion {
+  nombre: string;
+  valor: string;
   notificacion: string;
+  evento: string;
   expanded: boolean;
   opened: boolean;
   transferible: boolean;
@@ -96,6 +80,15 @@ export interface ConfiguracionEmpresa {
   CONTENIDOPOLITICA: string;
   TITULOTERMINOS: string;
   CONTENIDOTERMINOS: string;
+}
+
+export interface EMPRESA {
+  nombreEmpresa: string;
+  nitEmpresa: string;
+  estadoEmpresa: string;
+  correoEmpresa: string;
+  telefonoEmpresa: string;
+  direccionEmpresa: string;
 }
 
 export interface ESTILOS {
@@ -161,35 +154,35 @@ export interface TIPODOCUMENTO {
 /** TIPO EVENTO */
 
 export interface EVENTODISPONIBLE {
-  eventoEscenario: string;
   eventoId: number;
   eventoDescripcion: string;
-  eventoImagenes: EventoImagene[];
-  eventoFechaInicialVenta: string;
-  eventoFechaInicio: string;
-  eventoPrecioBoleta: string;
-  eventoHoraApertura: string;
+  eventoImagenes: EventoImagenes[];
   eventoDisponibilidad: string;
-  eventoTipoEvento: string;
+  patrocinadores: Patrocinadores[];
   eventoCategoria: string;
   eventoDireccion: string;
-  eventoInformacionGeneral: EventoInformacionGeneral;
-  eventoFechaFin: string;
-  eventoEsAforoDisponible: number;
   eventoFechaFinalVenta: string;
-  eventoOrganizador: string;
+  eventoOrganizador: EventoOrganizador;
+  restrinciones: Restrinciones[];
   eventoNombre: string;
   eventoVideo: string;
   eventoCiudad: string;
   eventoEstado: string;
-  eventoAnuncio: string;
+  eventoModalidadEvento: string;
+  eventoModalidadEventoId: number;
+  eventoEscenario: string;
+  eventoFechaInicialVenta: string;
+  eventoFechaInicio: string;
+  eventoPrecioBoleta: string;
+  eventoHoraApertura: string;
+  eventoFechaFin: string;
   eventoDepartamento: string;
   eventoTipoEventoId: number;
 }
 
-export interface EventoInformacionGeneral {
-  numeroParrafos: string;
-  parrafos: Parrafo[];
+export interface Restrinciones {
+  estado: number;
+  nombre: string;
 }
 
 export interface Parrafo {
@@ -197,17 +190,95 @@ export interface Parrafo {
   orden: number;
 }
 
-export interface EventoImagene {
+export interface Patrocinadores {
+  pagina: string;
+  imagen: string;
+  imagenPatrocinador: string;
+  nombre: string;
+}
+
+export interface EventoImagenes {
   fecha: string;
   nombre: string;
+  tipoMultimedia: string;
+  tipoMultimediaId: number;
   url: string;
+}
+
+export interface EventoOrganizador {
+  nit: string;
+  nombre: string;
+  pagina: string;
+  pulep: string;
+  telefono: string;
 }
 
 /** Detalle usuario */
 export interface DETALLEUSUARIO{
+  idUsuario: string;
   usuarioNombreLogin: string;
   usuarioNombrePersona: string;
   usuarioEmail: string;
   usuarioCelular: string;
+  usuarioDocumento: string;
   usuarioIniciales: string;
+}
+
+export interface USUARIO{
+  documento: string;
+  tipoDocumento: TIPODOCUMENTO;
+  primerNombre: string;
+  segundoNombre: string;
+  apellidoUno: string;
+  apellidoDos: string;
+  celular: string;
+  correo: string;
+  telefono: string;
+  idPersona: string;
+  fechaNacimiento: string;
+}
+
+/** FILTRO EVENTOS */
+export interface CIUDADES{
+  codigo: string;
+  codigoDepartamento: string;
+  nombreDepartamento: string;
+  nombreCiudad: string;
+}
+
+export interface CATEGORIAS{
+  idCategoria: string;
+  nombreCategoria: string;
+  listCategoriaHijas: CATEGORIAS[];
+}
+
+/** SILLETERIA */
+
+export interface LOCALIDAD {
+  zonaId: number;
+  zonaNombre: string;
+  sectores: Sectore[];
+  expanded: boolean;
+}
+
+export interface Sectore {
+  zonaId: number;
+  zonaNombre: string;
+  zonaValor: number;
+  tieneSillteria: boolean;
+}
+
+export interface SILLETERIA{
+  silleteriaColumna: number;
+  silleteriaEscenario: number;
+  silleteriaEstado: number;
+  silleteriaFila: number;
+  silleteriaId: number;
+  silleteriaNombre: string;
+  silleteriaZona: number;
+}
+
+export interface SILLAS {
+  silla: SILLETERIA;
+  selected: boolean;
 }

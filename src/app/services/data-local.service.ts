@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfiguracionEmpresa, DETALLEUSUARIO } from '../interfaces/interfaces';
+import { ConfiguracionEmpresa, DETALLEUSUARIO, EMPRESA } from '../interfaces/interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 
@@ -8,6 +8,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class DataLocalService {
   configuracion: ConfiguracionEmpresa;
+  empresa: EMPRESA;
   constructor(private storage: Storage,
               private toastController: ToastController) {
                 // this.cargarConfiguracion();
@@ -21,24 +22,6 @@ export class DataLocalService {
   }
 
   guardarConfiguracion(confi: ConfiguracionEmpresa) {
-    // let existe = false;
-
-   /*  console.log(confi);
-    if (this.configuracion) {
-        existe = true;
-    }
-
-    this.storage.set('configuracion', confi);
-    this.configuracion = confi;
-
-   if (existe) {
-      if (confi.VERSION > this.configuracion.VERSION){
-        this.storage.set('configuracion', confi);
-      }
-    } else{
-      this.storage.set('configuracion', confi);
-    }*/
-
     this.storage.set('configuracion', confi);
   }
 
@@ -46,6 +29,17 @@ export class DataLocalService {
     this.storage.set('usuario', usuario);
   }
 
+  guardarEmpresa(empresa: EMPRESA) {
+    this.storage.set('empresa', empresa);
+  }
+
+  async cargarEmpresa() {
+    const empresa = await this.storage.get('empresa');
+    this.empresa = empresa || [];
+    return this.empresa;
+  }
+
+  /*+++++++USUARIO+++++++++*/
   async getLogin() {
     const login = await this.storage.get('usuario');
     return login || false;
@@ -60,4 +54,12 @@ export class DataLocalService {
     toast.present();
   }
 
+  setPage(page: string){
+    this.storage.set('page', page);
+  }
+
+  async getPage() {
+    const page = await this.storage.get('page');
+    return page || '';
+  }
 }

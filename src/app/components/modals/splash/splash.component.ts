@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 
 @Component({
@@ -10,23 +10,24 @@ export class SplashComponent implements OnInit {
 
   constructor(public loadingController: LoadingController,
               public modalController: ModalController) {
-    this.presentLoading();
+    // this.presentLoading();
    }
 
   ngOnInit() {}
 
-  async presentLoading() {
+  /*async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'class-loading',
     //  message: 'Please wait...',
-      duration: 2000,
+    //  duration: 2000,
       mode: 'ios',
       spinner: 'dots'
     });
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
-    this.modalController.dismiss();
+   // this.modalController.dismiss();
     console.log('Loading dismissed!');
-  }
+  }*/
+
 }

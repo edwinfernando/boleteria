@@ -1,7 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { BOTONES, GENERAL, DETALLEUSUARIO } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { ModalService } from '../../services/modal.service';
+import { Router } from '@angular/router';
+import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
+
 
 @Component({
   selector: 'app-mi-perfil',
@@ -15,12 +19,15 @@ export class MiPerfilPage implements OnInit {
   screenHeight: any;
   ajustarFooter = false;
   ajustarTemp = false;
+  pagePadre = '';
   detalleUsuario: DETALLEUSUARIO = {
+    idUsuario: '',
     usuarioNombreLogin: '',
     usuarioNombrePersona: '',
     usuarioEmail: '',
     usuarioCelular: '',
     usuarioIniciales: '',
+    usuarioDocumento: ''
   };
 
   estiloGeneral: GENERAL = {
@@ -37,8 +44,12 @@ export class MiPerfilPage implements OnInit {
     COLOR_TEXT: ''
   };
 
+  @ViewChild(ToolbarComponent) toolbarComponent: ToolbarComponent;
+
   constructor(private dataLocal: DataLocalService,
-              private modalService: ModalService) {
+              private modalService: ModalService,
+              private navCtrl: NavController,
+              private router: Router) {
   }
 
   async ngOnInit() {
@@ -47,6 +58,10 @@ export class MiPerfilPage implements OnInit {
         this.estiloGeneral = resp.ESTILOS.GENERAL;
         this.estiloBotones = resp.ESTILOS.BOTONES;
       }
+    });
+
+    this.dataLocal.getPage().then( page => {
+      this.pagePadre = page;
     });
 
     this.getDetalleUsuario();
@@ -62,7 +77,7 @@ export class MiPerfilPage implements OnInit {
     getScreenSize(event?) {
           this.screenHeight = window.innerHeight;
           this.screenWidth = window.innerWidth;
-          console.log(this.screenHeight, this.screenWidth);
+          // console.log(this.screenHeight, this.screenWidth);
           if (this.screenWidth < 768){
             this.ajustarFooter = true;
           } else if (!this.ajustarTemp){
@@ -78,11 +93,23 @@ export class MiPerfilPage implements OnInit {
     });
   }
 
-  onClickEditarPerfil(){
-
+  async openModalEditarPerfil(){
+    const result = await this.modalService.openModalEditarPerfil(this.detalleUsuario.usuarioEmail, this.detalleUsuario.idUsuario);
+    if (result) {
+      this.getDetalleUsuario();
+      this.toolbarComponent.getDetalleUsuario();
+    }
   }
 
-  async onClickCerrarSesion(){
+  async openModalCambiarContrasena(){
+    const result = await this.modalService.openModalCambiarContrasena(this.detalleUsuario.usuarioEmail);
+  }
+
+  async openModalCerrarSesion(){
     const result = await this.modalService.openModalCerrarSesion();
+  }
+
+  onClickSalir(){
+    this.navCtrl.back();
   }
 }

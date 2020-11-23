@@ -1,14 +1,31 @@
 import { Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertaComponent } from '../components/modals/alerta/alerta.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilidadesService {
 
-  constructor(private loadingCtrl: LoadingController) { }
+  constructor(private loadingCtrl: LoadingController,
+              private modalCtrl: ModalController) { }
 
-  public static formatearNumeroMonedaDecimas(valor: any) {
+  async showAlert(titulo: string, mensaje: string) {
+    const modal = await this.modalCtrl.create({
+      component: AlertaComponent,
+      cssClass: 'modal-class-alerta',
+      componentProps: {
+        titulo,
+        mensaje
+      },
+      mode: 'ios'
+    });
+
+    await modal.present();
+    modal.onDidDismiss();
+  }
+
+  formatearNumeroMonedaDecimas(valor: any) {
     const options = { style: 'currency', currency: 'USD' };
     const numberFormat = new Intl.NumberFormat('en-US', options);
     let valorFormato: any;

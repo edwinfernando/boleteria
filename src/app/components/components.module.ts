@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ItemEventoComponent } from './item-evento/item-evento.component';
 import { SlideComponent } from './slide/slide.component';
 import { IonicModule } from '@ionic/angular';
-import { PaisesComponent } from './modals/paises/paises.component';
 import { ExpandibleComponent } from './expandible/expandible.component';
-import { ItemCategoriaComponent } from './item-categoria/item-categoria.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegistrateComponent } from './modals/registrate/registrate.component';
 import { IniciarSesionComponent } from './modals/iniciar-sesion/iniciar-sesion.component';
@@ -23,16 +21,23 @@ import { TransferirEntradaComponent } from './modals/transferir-entrada/transfer
 import { SolicitarEntradaComponent } from './modals/solicitar-entrada/solicitar-entrada.component';
 import { TuPedidoComponent } from './modals/tu-pedido/tu-pedido.component';
 import { CerrarSesionComponent } from './modals/cerrar-sesion/cerrar-sesion.component';
+import { EditarPerfilComponent } from './modals/editar-perfil/editar-perfil.component';
+import { RecuperarContrasenaComponent } from './modals/recuperar-contrasena/recuperar-contrasena.component';
+import { CambiarContrasenaComponent } from './modals/cambiar-contrasena/cambiar-contrasena.component';
+import { ErrorConexionComponent } from './modals/error-conexion/error-conexion.component';
+import { ItemPatrocinadorComponent } from './item-patrocinador/item-patrocinador.component';
+import { SilleteriaComponent } from './popovers/silleteria/silleteria.component';
+import { LocalidadComponent } from './popovers/localidad/localidad.component';
+import { CantidadComponent } from './popovers/cantidad/cantidad.component';
 
 @NgModule({
   declarations: [
     ItemEventoComponent,
     ItemEventoDosComponent,
     SlideComponent,
-    PaisesComponent,
     ExpandibleComponent,
     ExpandibleEventoComponent,
-    ItemCategoriaComponent,
+    ItemPatrocinadorComponent,
     ItemPromocionComponent,
     ToolbarComponent,
     ToolbarModalComponent,
@@ -45,16 +50,22 @@ import { CerrarSesionComponent } from './modals/cerrar-sesion/cerrar-sesion.comp
     TransferirEntradaComponent,
     SolicitarEntradaComponent,
     TuPedidoComponent,
-    CerrarSesionComponent
+    CerrarSesionComponent,
+    EditarPerfilComponent,
+    RecuperarContrasenaComponent,
+    CambiarContrasenaComponent,
+    ErrorConexionComponent,
+    LocalidadComponent,
+    SilleteriaComponent,
+    CantidadComponent
   ],
   exports: [
     ItemEventoComponent,
     ItemEventoDosComponent,
     SlideComponent,
-    PaisesComponent,
     ExpandibleComponent,
     ExpandibleEventoComponent,
-    ItemCategoriaComponent,
+    ItemPatrocinadorComponent,
     ItemPromocionComponent,
     ToolbarComponent,
     ToolbarModalComponent,
@@ -67,7 +78,14 @@ import { CerrarSesionComponent } from './modals/cerrar-sesion/cerrar-sesion.comp
     TransferirEntradaComponent,
     SolicitarEntradaComponent,
     TuPedidoComponent,
-    CerrarSesionComponent
+    CerrarSesionComponent,
+    EditarPerfilComponent,
+    RecuperarContrasenaComponent,
+    CambiarContrasenaComponent,
+    ErrorConexionComponent,
+    LocalidadComponent,
+    SilleteriaComponent,
+    CantidadComponent
   ],
   imports: [
     CommonModule,

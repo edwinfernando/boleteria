@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Evento, EVENTOS, BOTONES, EVENTODISPONIBLE } from '../../interfaces/interfaces';
+import { EVENTOS, BOTONES, EVENTODISPONIBLE } from '../../interfaces/interfaces';
 import { Router } from '@angular/router';
 import { DataLocalService } from '../../services/data-local.service';
 import { ModalController } from '@ionic/angular';
@@ -60,7 +60,7 @@ export class ItemEventoDosComponent implements OnInit {
   verEvento() {
     this.router.navigate(['/evento'], {
       queryParams: {
-        evento: JSON.stringify(this.evento)
+        evento: this.evento.eventoId
       }
     });
   }
@@ -68,7 +68,7 @@ export class ItemEventoDosComponent implements OnInit {
   comprarAcceso() {
     this.router.navigate(['/evento'], {
       queryParams: {
-        evento: JSON.stringify(this.evento),
+        evento: this.evento.eventoId,
         isComprar: true
       }
     });
