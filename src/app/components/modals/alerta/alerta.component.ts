@@ -12,7 +12,9 @@ export class AlertaComponent implements OnInit {
 
   @Input() titulo = 'Algo salio mal';
   @Input() mensaje;
+  @Input() isReturnResult = false;
   marca: string;
+  imagen: string;
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
     COLOR_BACKGROUND_SLIDES: '',
@@ -35,11 +37,14 @@ export class AlertaComponent implements OnInit {
         this.estiloGeneral = resp.ESTILOS.GENERAL;
         this.estiloBotones = resp.ESTILOS.BOTONES;
         this.marca = resp.MARCA;
+        this.imagen = resp.IMAGEN;
       }
     });
   }
 
   onClickAceptar(){
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(
+      true
+    );
   }
 }

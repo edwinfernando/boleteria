@@ -7,6 +7,7 @@ import { AlertaComponent } from '../components/modals/alerta/alerta.component';
 })
 export class UtilidadesService {
 
+  isLoading = false;
   constructor(private loadingCtrl: LoadingController,
               private modalCtrl: ModalController) { }
 
@@ -23,6 +24,28 @@ export class UtilidadesService {
 
     await modal.present();
     modal.onDidDismiss();
+  }
+
+  async showAlertResult(titulo: string, mensaje: string) {
+    const modal = await this.modalCtrl.create({
+      component: AlertaComponent,
+      cssClass: 'modal-class-alerta',
+      componentProps: {
+        titulo,
+        mensaje,
+        isReturnResult: true
+      },
+      mode: 'ios'
+    });
+
+    await modal.present();
+    const data = await modal.onDidDismiss();
+
+    if (data.data !== undefined) {
+      return data.data;
+    } else {
+      return false;
+    }
   }
 
   formatearNumeroMonedaDecimas(valor: any) {
@@ -81,11 +104,15 @@ export class UtilidadesService {
      // message: this.loadingText
     });
 
+    this.isLoading = true;
     loading.present();
   }
 
   dissmisLoading(){
-    this.loadingCtrl.dismiss();
+    if (this.isLoading){
+      this.loadingCtrl.dismiss();
+      this.isLoading = false;
+    }
   }
 
   funTransformTextToHTML(terminos: any){

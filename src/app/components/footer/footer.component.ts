@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataLocalService } from '../../services/data-local.service';
 import { FOOTER, BOTONES, EMPRESA } from '../../interfaces/interfaces';
 import { Router } from '@angular/router';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -32,6 +33,7 @@ export class FooterComponent implements OnInit {
     COLOR_TEXT: ''
   };
   constructor(private dataLocal: DataLocalService,
+              private modalService: ModalService,
               private router: Router) { }
 
   ngOnInit() {
@@ -56,8 +58,6 @@ export class FooterComponent implements OnInit {
   }
 
   onClickContactenos(){
-    this.router.navigate(['/contactenos'], {
-      queryParams: {}
-    });
+    this.modalService.openModalContactenos();
   }
 }

@@ -6,6 +6,7 @@ import { DataLocalService } from './data-local.service';
 import jwt_decode from 'jwt-decode';
 import { SplashService } from './splash.service';
 import { ModalService } from './modal.service';
+import { UtilidadesService } from './utilidades.service';
 
 const URL = environment.url;
 const NIT_EMPRESA = environment.nitEmpresa;
@@ -18,10 +19,12 @@ export class DataService {
   httpOptions: any;
   countdown = 60;
   timerHandler: number;
+
   constructor(private http: HttpClient,
               private dataLocal: DataLocalService,
               private splashService: SplashService,
-              private modalService: ModalService) {
+              private modalService: ModalService,
+              private utilService: UtilidadesService) {
     this.httpOptions = {
       headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -250,6 +253,31 @@ export class DataService {
     });
   }
 
+  recuperarClave(request: any) {
+    console.log(request);
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/cliente/recuperarClave`,
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                          console.log(strRespuesta);
+                         // strRespuesta = JSON.parse(strRespuesta.respuesta);
+                        //  console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                          this.utilService.dissmisLoading();
+                        }
+                      );
+    });
+  }
+
   getTipoDocumentos(){
     return new Promise( (resolve, reject) => {
       this.http.post(`${URL}/portal/datos/obtenerTiposDeDocumentos`,
@@ -427,6 +455,180 @@ export class DataService {
                           if (strRespuesta.codigoRespuesta === '0'){
                             resolve(strRespuesta.respuesta);
                           //  this.dataLocal.guardarConfiguracion(strRespuesta.configuracionEmpresa);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  realizarVenta(request: any) {
+    console.log(request);
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/venta/realizar`,
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                         // strRespuesta = JSON.parse(strRespuesta.respuesta);
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  consultarBoleteria(request: any) {
+    console.log(request);
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/eventoMembresia/consultarBoletas`,
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                         // strRespuesta = JSON.parse(strRespuesta.respuesta);
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.respuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  consultarNotificaciones(request: any) {
+    console.log(request);
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/eventoMembresia/consultarBoletas`, // <-- Servicio notificaciones
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                         // strRespuesta = JSON.parse(strRespuesta.respuesta);
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.respuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  crearSolicitud(request: any) {
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/cliente/crearCliente`, // <-- Crear solicitud
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  solicitarBoleta(request: any) {
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/cliente/crearCliente`, // <-- Crears servicio solicitud boleta
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  registrarBoleta(request: any) {
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/cliente/crearCliente`, // <-- Crears servicio solicitud boleta
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  transferirBoleta(request: any) {
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/cliente/crearCliente`, // <-- Crears servicio solicitud boleta
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                          this.modalService.openModalError();
+                        }
+                      );
+    });
+  }
+
+  transferirBoletaPorNotificacion(request: any) {
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/cliente/crearCliente`, // <-- Crears servicio solicitud boleta
+                      request,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor)  => {
+                          console.log(strRespuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.mensajeRespuesta);
                           }else {
                             reject(strRespuesta.mensajeRespuesta);
                           }

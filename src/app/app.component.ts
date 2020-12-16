@@ -53,15 +53,15 @@ export class AppComponent {
     });
   }
 
-  getConfiguracion() {
-    this.dataService.getConfiguracion()
+  async getConfiguracion() {
+    await this.dataService.getConfiguracion()
         .then( (resp: ConfiguracionEmpresa) => {
             this.dataLocal.guardarConfiguracion(resp);
         }).catch( resp => {
             this.utilService.showAlert('Algo salio mal', resp);
         });
 
-    this.dataService.consultarEmpresa()
+    await this.dataService.consultarEmpresa()
         .then( (resp: EMPRESA) => {
          // console.log(resp);
           this.dataLocal.guardarEmpresa(resp);

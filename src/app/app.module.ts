@@ -18,6 +18,7 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 
 
 registerLocaleData(localeEs);
@@ -32,6 +33,7 @@ registerLocaleData(localeEs);
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RecaptchaModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
@@ -41,6 +43,12 @@ registerLocaleData(localeEs);
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     // Aqui usas el nombre que hayas colocado al locale, en este caso es
     { provide: LOCALE_ID, useValue: 'es' },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6Lee7qgZAAAAAC6i7J0fkf0_7ShBQKSXx8MafWHZ',
+      } as RecaptchaSettings,
+    }
   ],
   bootstrap: [AppComponent]
 })

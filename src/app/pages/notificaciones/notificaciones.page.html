@@ -9,7 +9,7 @@
                         <ion-label [style.color]="estiloGeneral.COLOR_TEXT" slot="start">{{ noti.notificacion }}</ion-label>
                     </ion-item>
                     <app-expandible expandHeight="auto" [expanded]="noti.expanded">
-                        <app-expandible-evento [notificacion]="noti"></app-expandible-evento>
+                        <app-expandible-evento [notificacion]="noti" [expanded]="lengthExpanded"></app-expandible-evento>
                     </app-expandible>
                 </ion-col>
 

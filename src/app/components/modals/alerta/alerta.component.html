@@ -18,22 +18,26 @@
             <ion-col class="col-label-modal" size="12">
                 <ion-label class="texto-alerta" [style.color]="estiloGeneral.COLOR_TEXT">{{mensaje}}</ion-label>
             </ion-col>
-            <!--<ion-col class="margin-top" size="12">
-                <ion-button class="button-style" (click)="onClickAceptar()" size="large" expand="block" mode="ios">
-                    <ion-text>
-                        <h3>Aceptar</h3>
-                    </ion-text>
-                </ion-button>
-            </ion-col>-->
             <ion-col size="12">
                 <br>
             </ion-col>
 
-            <ion-col size="12">
-                <ion-label [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO">
+            <ion-col *ngIf="isReturnResult" class="margin-top" size="12">
+                <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="onClickAceptar()" size="large" expand="block" fill="clear" mode="ios">
+                    <ion-item class="item-style item-button" lines="none" mode="ios">
+                        <ion-label>ACEPTAR</ion-label>
+                    </ion-item>
+                </ion-button>
+            </ion-col>
+
+            <ion-col *ngIf="!isReturnResult" size="12">
+
+                <ion-label *ngIf="imagen === ''" [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO">
                     <h1><strong>{{marca}}</strong></h1>
                 </ion-label>
+                <img class="imagen-logo" *ngIf="imagen !== ''" [src]="imagen" alt="">
             </ion-col>
+
         </ion-row>
     </ion-grid>
 </ion-content>

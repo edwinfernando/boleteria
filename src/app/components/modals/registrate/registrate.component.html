@@ -14,19 +14,19 @@
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="text" formControlName="nombre" autocomplete="off" (ionChange)="validarCampoChange('nombre')" (ionBlur)="validarCampo('nombre')" placeholder="Nombre"></ion-input>
+                        <ion-input type="text" formControlName="nombre" autocomplete="off" (ionChange)="validarCampoChange('nombre')" (ionBlur)="validarCampo('nombre')" placeholder="Nombre *"></ion-input>
                     </ion-item>
                     <span *ngIf="isNombreValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="text" formControlName="apellido" (ionChange)="validarCampoChange('apellido')" (ionBlur)="validarCampo('apellido')" placeholder="Apellido"></ion-input>
+                        <ion-input type="text" formControlName="apellido" (ionChange)="validarCampoChange('apellido')" (ionBlur)="validarCampo('apellido')" placeholder="Apellido *"></ion-input>
                     </ion-item>
                     <span *ngIf="isApellidoValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="item-select input-style" lines="none" mode="ios">
-                        <ion-select class="select" formControlName="tipoDocumento" (ionChange)="validarCampoChange('tipoDocumento')" placeholder="Tipo de documento" interface="popover">
+                        <ion-select class="select" formControlName="tipoDocumento" (ionChange)="validarCampoChange('tipoDocumento')" placeholder="Tipo de documento *" interface="popover">
                             <ion-select-option *ngFor="let tipoDocumento of listTipoDocumento" value="{{tipoDocumento.codigo}}" class="priMayuscula">{{tipoDocumento.nombreTipoDcoumento}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -34,31 +34,31 @@
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="tel" minlength="7" maxlength="10" formControlName="numeroDocumento" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad"></ion-input>
+                        <ion-input type="tel" minlength="7" maxlength="10" formControlName="numeroDocumento" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad *"></ion-input>
                     </ion-item>
                     <span *ngIf="isNumeroDocumentoValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" placeholder="Correo electronico"></ion-input>
+                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" placeholder="Correo electronico *"></ion-input>
                     </ion-item>
                     <span *ngIf="isCorreoValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="email" formControlName="confirmarCorreo" (ionChange)="validarCampoChange('confirmarCorreo')" (ionBlur)="validarCampo('confirmarCorreo')" placeholder="Confirmar correo electronico"></ion-input>
+                        <ion-input type="email" formControlName="confirmarCorreo" (ionChange)="validarCampoChange('confirmarCorreo')" (ionBlur)="validarCampo('confirmarCorreo')" placeholder="Confirmar correo electronico *"></ion-input>
                     </ion-item>
                     <span *ngIf="isConfirCorreoValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="tel" maxlength="10" formControlName="celular" (ionChange)="validarCampoChange('celular')" (ionBlur)="validarCampo('celular')" placeholder="Celular" pattern="^[0-9]*$"></ion-input>
+                        <ion-input type="tel" maxlength="10" formControlName="celular" (ionChange)="validarCampoChange('celular')" (ionBlur)="validarCampo('celular')" placeholder="Celular *" pattern="^[0-9]*$"></ion-input>
                     </ion-item>
                     <span *ngIf="isCelularValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="password" formControlName="contrasena" (ionChange)="validarCampoChange('contrasena')" (ionBlur)="validarCampo('contrasena')" placeholder="Contraseña"></ion-input>
+                        <ion-input type="password" formControlName="contrasena" (ionChange)="validarCampoChange('contrasena')" (ionBlur)="validarCampo('contrasena')" placeholder="Contraseña *"></ion-input>
                     </ion-item>
                     <span *ngIf="isContrasenaValido" class="requerido">El campo debe contener entre 5 a 10 caracteres</span>
                 </ion-col>

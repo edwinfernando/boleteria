@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GENERAL, BOTONES, EMPRESA } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-promociona-evento',
@@ -31,7 +32,8 @@ export class PromocionaEventoComponent implements OnInit {
     COLOR_BACKGROUND_B_COMPARTIR: '',
     COLOR_TEXT: ''
   };
-  constructor(private dataLocal: DataLocalService) { }
+  constructor(private dataLocal: DataLocalService,
+              private modalService: ModalService) { }
 
   async ngOnInit() {
     await this.dataLocal.cargarConfiguracion().then( resp => {
@@ -46,4 +48,7 @@ export class PromocionaEventoComponent implements OnInit {
     });
   }
 
+  onClickContactar(){
+    this.modalService.openModalContactenos();
+  }
 }

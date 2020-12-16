@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SILLETERIA, Sectore, GENERAL, BOTONES, SILLAS } from '../../../interfaces/interfaces';
-import { NavParams, PopoverController } from '@ionic/angular';
+import { NavParams, PopoverController, ModalController } from '@ionic/angular';
 import { DataLocalService } from '../../../services/data-local.service';
 
 @Component({
@@ -44,7 +44,8 @@ export class SilleteriaComponent implements OnInit {
 
   constructor(private dataLocal: DataLocalService,
               private navParam: NavParams,
-              private popCtrl: PopoverController) { }
+              private popCtrl: PopoverController,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.dataLocal.cargarConfiguracion().then( resp => {
@@ -70,6 +71,7 @@ export class SilleteriaComponent implements OnInit {
 
   seleccionaSilla(){
     this.popCtrl.dismiss(this.sillas);
+    // this.modalCtrl.dismiss(this.sillas);
   }
 
   onClickSilla(a: number, b: number){

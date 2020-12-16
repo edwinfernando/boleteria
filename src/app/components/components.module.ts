@@ -29,6 +29,9 @@ import { ItemPatrocinadorComponent } from './item-patrocinador/item-patrocinador
 import { SilleteriaComponent } from './popovers/silleteria/silleteria.component';
 import { LocalidadComponent } from './popovers/localidad/localidad.component';
 import { CantidadComponent } from './popovers/cantidad/cantidad.component';
+import { ContactenosComponent } from './modals/contactenos/contactenos.component';
+import { RecaptchaModule} from 'ng-recaptcha';
+import { RegistrarPinComponent } from './modals/registrar-pin/registrar-pin.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import { CantidadComponent } from './popovers/cantidad/cantidad.component';
     ErrorConexionComponent,
     LocalidadComponent,
     SilleteriaComponent,
-    CantidadComponent
+    CantidadComponent,
+    ContactenosComponent,
+    RegistrarPinComponent
   ],
   exports: [
     ItemEventoComponent,
@@ -85,14 +90,17 @@ import { CantidadComponent } from './popovers/cantidad/cantidad.component';
     ErrorConexionComponent,
     LocalidadComponent,
     SilleteriaComponent,
-    CantidadComponent
+    CantidadComponent,
+    ContactenosComponent,
+    RegistrarPinComponent
   ],
   imports: [
     CommonModule,
     IonicModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    PipesModule
-  ]
+    PipesModule,
+    RecaptchaModule
+  ],
 })
 export class ComponentsModule { }

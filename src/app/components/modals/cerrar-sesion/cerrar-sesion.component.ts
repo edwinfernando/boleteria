@@ -40,9 +40,9 @@ export class CerrarSesionComponent implements OnInit {
     });
   }
 
-  async onClickAceptar(){
+  onClickAceptar(){
     this.modalCtrl.dismiss(true);
-    await this.dataLocal.setLogin(null);
+    this.dataLocal.setLogin(null);
     /*this.navCtrl.navigateForward('/', {
       replaceUrl: true,
       skipLocationChange: false,

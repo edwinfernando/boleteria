@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfiguracionEmpresa, DETALLEUSUARIO, EMPRESA } from '../interfaces/interfaces';
+import { ConfiguracionEmpresa, DETALLEUSUARIO, EMPRESA, SOLICITUDEVENTO } from '../interfaces/interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 
@@ -61,5 +61,14 @@ export class DataLocalService {
   async getPage() {
     const page = await this.storage.get('page');
     return page || '';
+  }
+
+  setEventosSolicitud(listSolicitudEventos: SOLICITUDEVENTO[]){
+    this.storage.set('solicitudEventos', listSolicitudEventos);
+  }
+
+  async getEventosSolicitud() {
+    const listSolicitudEventos = await this.storage.get('solicitudEventos');
+    return listSolicitudEventos || [];
   }
 }

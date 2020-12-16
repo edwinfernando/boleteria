@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GENERAL, BOTONES, Boleteria } from '../../../interfaces/interfaces';
+import { GENERAL, BOTONES, Boleteria, COMPRA, DETALLEUSUARIO } from '../../../interfaces/interfaces';
 import { DataLocalService } from '../../../services/data-local.service';
 import { ModalController } from '@ionic/angular';
 import { ModalService } from '../../../services/modal.service';
 import { Router } from '@angular/router';
 import { UtilidadesService } from '../../../services/utilidades.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-tu-pedido',
@@ -14,6 +15,13 @@ import { UtilidadesService } from '../../../services/utilidades.service';
 export class TuPedidoComponent implements OnInit {
 
   @Input() lBoleteria: Boleteria[];
+  eventoId: number;
+  usuarioId: string;
+  listaCompra: COMPRA[] = [];
+  compra: COMPRA = {
+    cantidad: 0,
+    zonaId: 0
+  };
   nombreEvento: string;
   valorBoletas = 0;
   factura = [];
@@ -31,6 +39,7 @@ export class TuPedidoComponent implements OnInit {
     COLOR_TEXT: ''
   };
   constructor(private dataLocal: DataLocalService,
+              private dataService: DataService,
               private modalCtlr: ModalController,
               private modalService: ModalService,
               private utilService: UtilidadesService,
@@ -44,12 +53,22 @@ export class TuPedidoComponent implements OnInit {
       }
     });
 
-    this.nombreEvento = this.lBoleteria[0].nombre;
-    this.lBoleteria.forEach( boleta => {
-      this.valorBoletas += boleta.valor;
-      console.log(boleta.valor);
+    this.dataLocal.getLogin().then((resp: DETALLEUSUARIO) => {
+      this.usuarioId = resp.idUsuario;
     });
 
+   // console.log(this.lBoleteria[0]);
+    this.nombreEvento = this.lBoleteria[0].nombre;
+    this.eventoId = this.lBoleteria[0].eventoId;
+    this.listaCompra = [];
+    this.compra.zonaId = this.lBoleteria[0].zonaId;
+    this.compra.cantidad = 0;
+    this.lBoleteria.forEach( boleta => {
+      this.valorBoletas += boleta.valor;
+      this.compra.cantidad += 1;
+    });
+
+    this.listaCompra.push(this.compra);
     console.log(this.valorBoletas);
 
     this.factura = [
@@ -59,11 +78,11 @@ export class TuPedidoComponent implements OnInit {
       },
       {
         boleta: 'Transacción',
-        precio: '$10.000'
+        precio: this.formatearValor(this.lBoleteria[0].eventoValorTransaccion)
       },
       {
         boleta: 'Subtotal',
-        precio: this.formatearValor(this.valorBoletas + 10000)
+        precio: this.formatearValor(this.valorBoletas + this.lBoleteria[0].eventoValorTransaccion)
       }
     ];
   }
@@ -74,8 +93,28 @@ export class TuPedidoComponent implements OnInit {
   }
 
   completarCompra() {
-    this.modalCtlr.dismiss(true);
-    this.router.navigateByUrl('/home', { skipLocationChange: false });
+    this.utilService.showLoading();
+    const request = {
+      strPeticion: JSON.stringify({
+        usuarioId: this.usuarioId,
+        eventoId: this.eventoId,
+        listaCompra: this.listaCompra
+      })
+    };
+    this.dataService.realizarVenta(request)
+        .then( (resp: string) => {
+          this.utilService.dissmisLoading();
+          this.modalCtlr.dismiss(true);
+          this.utilService.showAlert('', resp);
+          this.router.navigateByUrl('/home', { skipLocationChange: false });
+        }).catch( resp => {
+          this.utilService.dissmisLoading();
+          this.utilService.showAlert('Algo salio mal', resp);
+        });
+   /* this.modalCtlr.dismiss(
+            true
+          );
+    this.router.navigateByUrl('/home', { skipLocationChange: false });*/
   }
 
   formatearValor(valor: any){

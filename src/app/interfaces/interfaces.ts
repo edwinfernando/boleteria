@@ -38,25 +38,27 @@ export interface Menu {
 export interface Boleteria {
   nombre: string;
   valor: number;
+  eventoId: number;
   eventoFechaInicio: string;
   eventoCiudad: string;
   eventoDepartamento: string;
   eventoEscenario: string;
   eventoDireccion: string;
+  eventoValorTransaccion: number;
   localidad: string;
+  zonaId: number;
   silla: string;
   expanded: boolean;
 }
 
 export interface Notificacion {
-  nombre: string;
-  valor: string;
+  idTransferencia: number;
+  nombrePersonaEnvia: string;
   notificacion: string;
-  evento: string;
+  boleta: Boleteria;
+  solicitudTransferir: boolean;
   expanded: boolean;
   opened: boolean;
-  transferible: boolean;
-  received: boolean;
 }
 
 /** CONSULTAR Y RESPUESTAS DEL SERVIDOR * */
@@ -178,6 +180,7 @@ export interface EVENTODISPONIBLE {
   eventoFechaFin: string;
   eventoDepartamento: string;
   eventoTipoEventoId: number;
+  eventoValorTransaccion: number;
 }
 
 export interface Restrinciones {
@@ -281,4 +284,23 @@ export interface SILLETERIA{
 export interface SILLAS {
   silla: SILLETERIA;
   selected: boolean;
+}
+
+/** COMPRA */
+export interface COMPRA {
+  zonaId: number;
+  cantidad: number;
+}
+
+/** Tipo queja solictud */
+
+export interface TIPOQUEJASOLICITUD {
+  codigo: string;
+  nombreTipo: string;
+  tipoSolicitud: TIPOQUEJASOLICITUD[]
+}
+
+export interface SOLICITUDEVENTO{
+  codigo: number;
+  nombreEvento: string;
 }

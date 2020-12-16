@@ -4,19 +4,42 @@
 }
 
 .item-silla {
-    border: 1px solid;
+    border: 0.5px solid rgba(0, 0, 0, 0.5);
     border-radius: 0.5em;
     --border-radius: 0.5em;
-    height: 30px;
-    width: 30px;
-    margin: 0.3vw;
+    height: 2vw;
+    width: 2.5vw;
+    margin: 0.2vw;
     cursor: pointer;
     ion-label {
         width: 100%;
         height: 100%;
         position: absolute;
-        top: 7px;
-        font-size: small;
+        top: 0.5vw;
+        font-size: 0.8vw;
         text-align: center;
     }
+}
+
+@media only screen and (max-width: 768px) {
+    .item-silla {
+        height: 3vw;
+        width: 3.5vw;
+        ion-label {
+            top: 0.7vw;
+            font-size: 1.1vw;
+        }
+    }
+}
+
+.scroll {
+    overflow: scroll!important;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.div-silla {
+    position: static;
 }

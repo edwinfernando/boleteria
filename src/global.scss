@@ -108,6 +108,10 @@
     text-transform: uppercase !important;
 }
 
+.texto-justificado {
+    text-align: justify;
+}
+
 .popover-content {
     width: auto !important;
 }
@@ -267,7 +271,7 @@ ion-spinner {
 }
 
 .modal-class-transferir {
-    --height: 550px !important;
+    --height: 370px !important;
     --backdrop-opacity: 0.3;
     --width: 350px;
     --border-radius: 1em;
@@ -275,6 +279,13 @@ ion-spinner {
 
 .modal-class-solicitar {
     --height: 370px !important;
+    --backdrop-opacity: 0.3;
+    --width: 350px;
+    --border-radius: 1em;
+}
+
+.modal-class-pin {
+    --height: 300px !important;
     --backdrop-opacity: 0.3;
     --width: 350px;
     --border-radius: 1em;
@@ -333,6 +344,13 @@ ion-spinner {
     --height: 570px !important;
     --backdrop-opacity: 0.3;
     --width: 350px;
+    --border-radius: 1em;
+}
+
+.modal-contactenos {
+    --height: 85% !important;
+    --backdrop-opacity: 0.3;
+    --width: 500px;
     --border-radius: 1em;
 }
 
@@ -406,6 +424,7 @@ ion-spinner {
 .input-style {
     border: 1px solid rgba(0, 0, 0, 0.2) !important;
     border-radius: 0.5em;
+    --border-radius: 0.5em;
     ion-label {
         white-space: pre-line !important;
         margin: 0px;

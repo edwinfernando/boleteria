@@ -14,13 +14,13 @@
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" placeholder="Dirección de correo electronico"></ion-input>
+                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" placeholder="Dirección de correo electronico *"></ion-input>
                     </ion-item>
                     <span *ngIf="isCorreoValido" class="requerido">Campo vacio o invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="tel" minlength="7" maxlength="10" formControlName="numeroDocumento" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad"></ion-input>
+                        <ion-input type="tel" minlength="7" maxlength="10" formControlName="numeroDocumento" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad *"></ion-input>
                     </ion-item>
                     <span *ngIf="isNumeroDocumentoValido" class="requerido">Campo vacio o invalido</span>
                 </ion-col>

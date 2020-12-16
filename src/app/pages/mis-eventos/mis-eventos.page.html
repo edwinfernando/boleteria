@@ -1,4 +1,4 @@
-<ion-grid fixed>
+<!--<ion-grid fixed>
     <ion-row class="border-radius">
         <ion-col class="sin-padding" size-lg="6" size-md="6" size-sm="12" size-xs="12">
             <ion-searchbar class="toolbar-buscar" [style.color]="estiloGeneral.COLOR_TEXT" [style.--placeholder-color]="estiloGeneral.COLOR_TEXT" search-icon="false" placeholder="Buscar evento o artista" animated [debounce]="700" mode="ios"></ion-searchbar>
@@ -32,12 +32,12 @@
             </ion-row>
         </ion-col>
     </ion-row>
-</ion-grid>
+</ion-grid>-->
 
 <ion-grid fixed>
     <ion-list-header>
         <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT">
-            <h2><strong>Próximos eventos</strong></h2>
+            <h2><strong>{{etiquetaTitulo}}</strong></h2>
         </ion-label>
     </ion-list-header>
     <ion-row>
@@ -45,15 +45,15 @@
             <ion-row>
                 <ion-col size-lg="9" size-md="8" size-sm="12" size-xs="12">
                     <ion-item class="input-style border-radius" (click)="onClickEvento(boleteria)" detailIcon="chevron-down-outline" lines="none" detail>
-                        <ion-label [style.color]="estiloGeneral.COLOR_TEXT" slot="start">Rolling Stones en Colombia</ion-label>
-                        <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT" slot="end">$210.00</ion-label>
+                        <ion-label [style.color]="estiloGeneral.COLOR_TEXT" slot="start">{{boleteria.nombre}}</ion-label>
+                        <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT" slot="end">{{formatearValor(boleteria.valor)}}</ion-label>
                     </ion-item>
                     <app-expandible expandHeight="auto" [expanded]="boleteria.expanded">
-                        <app-expandible-evento></app-expandible-evento>
+                        <app-expandible-evento [boleta]="boleteria" [expanded]="lengthExpanded"></app-expandible-evento>
                     </app-expandible>
                 </ion-col>
                 <ion-col size-lg="3" size-md="4" size-sm="12" size-xs="12">
-                    <ion-button class="button-acceso ajust-button" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="openModalTransferir()" expand="block" fill="clear">
+                    <ion-button class="button-acceso ajust-button" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" (click)="openModalTransferir(boleteria)" expand="block" fill="clear">
                         <ion-item class="item-style item-button" lines="none" mode="ios">
                             <ion-label>Transferir</ion-label>
                         </ion-item>
@@ -61,7 +61,7 @@
                 </ion-col>
             </ion-row>
         </ion-col>
-        <ion-col class="col-button-acceso centrado" size="12">
+        <!--<ion-col class="col-button-acceso centrado" size="12">
             <ion-button [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" size="small" fill="clear" (click)="verMasEventos()" mode="ios">
                 <ion-text>
                     <h6>Ver más eventos</h6>
@@ -70,6 +70,6 @@
         </ion-col>
         <ion-col class="centrado" size="12">
             <ion-icon name="chevron-down-outline"></ion-icon>
-        </ion-col>
+        </ion-col>-->
     </ion-row>
 </ion-grid>

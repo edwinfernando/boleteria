@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Categoria, GENERAL, TOOLBAR, BOTONES, EVENTODISPONIBLE, EventoImagenes, CATEGORIAS, CIUDADES } from '../../interfaces/interfaces';
+import { Categoria, GENERAL, TOOLBAR, BOTONES, EVENTODISPONIBLE, EventoImagenes, CATEGORIAS, CIUDADES, SOLICITUDEVENTO } from '../../interfaces/interfaces';
 import { DataService } from '../../services/data.service';
 import { DataLocalService } from '../../services/data-local.service';
 import { ModalService } from '../../services/modal.service';
@@ -57,6 +57,8 @@ export class HomePage implements OnInit {
     COLOR_BACKGROUND_B_COMPARTIR: '',
     COLOR_TEXT: ''
   };
+
+  listEventosSolicitud: SOLICITUDEVENTO[] = [];
 
   constructor(private dataService: DataService,
               private dataLocal: DataLocalService,
@@ -154,7 +156,19 @@ export class HomePage implements OnInit {
       if (this.imagenesSlide.length < 5){
         this.imagenesSlide.push(this.eventosConsultados[index].eventoImagenes[0]);
       }
+
+      this.setEventosSolicitud(this.eventosConsultados[index]);
     }
+  }
+
+  setEventosSolicitud(evento: EVENTODISPONIBLE){
+    const ev: SOLICITUDEVENTO = {
+      codigo: evento.eventoId,
+      nombreEvento: evento.eventoNombre
+    }
+
+    this.listEventosSolicitud.unshift(ev);
+    this.dataLocal.setEventosSolicitud(this.listEventosSolicitud);
   }
 
   sizeEventoLg(tipo: number){

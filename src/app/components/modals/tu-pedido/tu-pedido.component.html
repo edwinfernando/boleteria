@@ -1,4 +1,12 @@
-<app-toolbar-modal></app-toolbar-modal>
+<ion-header class="ion-no-border">
+    <ion-toolbar class="toolbar-modal">
+        <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+                <ion-icon [style.color]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" name="close-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content class="centrado no-scroll ion-padding">
     <ion-grid fixed>
@@ -27,7 +35,7 @@
             <ion-col size="12">
                 <ion-item lines="none" mode="ios">
                     <ion-label [style.color]="estiloGeneral.COLOR_TEXT" slot="start"><strong>Total</strong></ion-label>
-                    <ion-label class="ion-text-right" [style.color]="estiloGeneral.COLOR_TEXT"><strong>{{formatearValor(valorBoletas + 10000)}}</strong></ion-label>
+                    <ion-label class="ion-text-right" [style.color]="estiloGeneral.COLOR_TEXT"><strong>{{formatearValor(valorBoletas + lBoleteria[0].eventoValorTransaccion)}}</strong></ion-label>
                 </ion-item>
             </ion-col>
             <ion-col size="12">

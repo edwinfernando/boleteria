@@ -36,7 +36,7 @@
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="item-select input-style" lines="none" mode="ios">
-                        <ion-select class="select" formControlName="tipoDocumento" value="{{usuario.tipoDocumento.codigo}}" (ionBlur)="validarCampo('tipoDocumento')" placeholder="Tipo de documento" interface="popover">
+                        <ion-select class="select" formControlName="tipoDocumento" value="{{usuario.tipoDocumento.codigo}}" (ionBlur)="validarCampo('tipoDocumento')" placeholder="Tipo de documento *" interface="popover">
                             <ion-select-option *ngFor="let tipoDocumento of listTipoDocumento" value="{{tipoDocumento.codigo}}" class="priMayuscula">{{tipoDocumento.nombreTipoDcoumento}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -44,19 +44,19 @@
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="tel" maxlength="10" formControlName="numeroDocumento" value="{{usuario.documento}}" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad"></ion-input>
+                        <ion-input type="tel" maxlength="10" formControlName="numeroDocumento" value="{{usuario.documento}}" (ionChange)="validarCampoChange('numeroDocumento')" (ionBlur)="validarCampo('numeroDocumento')" placeholder="Documento de identidad *"></ion-input>
                     </ion-item>
                     <span *ngIf="isNumeroDocumentoValido" class="requerido">Campo vacio o invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" value="{{usuario.correo}}" placeholder="Correo electronico"></ion-input>
+                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" value="{{usuario.correo}}" placeholder="Correo electronico *"></ion-input>
                     </ion-item>
                     <span *ngIf="isCorreoValido" class="requerido">Campo vacio o invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="tel" maxlength="10" formControlName="celular" (ionChange)="validarCampoChange('celular')" (ionBlur)="validarCampo('celular')" value="{{usuario.celular}}" placeholder="Celular" pattern="^[0-9]*$"></ion-input>
+                        <ion-input type="tel" maxlength="10" formControlName="celular" (ionChange)="validarCampoChange('celular')" (ionBlur)="validarCampo('celular')" value="{{usuario.celular}}" placeholder="Celular *" pattern="^[0-9]*$"></ion-input>
                     </ion-item>
                     <span *ngIf="isCelularValido" class="requerido">Campo vacio o invalido</span>
                 </ion-col>

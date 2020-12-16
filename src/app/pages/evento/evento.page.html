@@ -177,20 +177,20 @@
         <ion-grid fixed>
             <ion-row>
                 <ion-col [sizeLg]="tieneSillas() !== 0? 6 : 12" [sizeMd]="tieneSillas() !== 0? 6 : 12" size-sm="12" size-xs="12">
-                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" button (click)="seleccionarLocalidad($event)" detailIcon="chevron-down-outline" lines="none" detail>
-                        <ion-input class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar localidad" [value]="zonaNombre" readonly>
+                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" detailIcon="chevron-down-outline" lines="none" button (click)="seleccionarLocalidad($event)" detail>
+                        <ion-input class="select cursor" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar localidad" [value]="zonaNombre" readonly>
                         </ion-input>
                     </ion-item>
                 </ion-col>
                 <ion-col *ngIf="tieneSillas() === 1" size-lg="3" size-md="3" size-sm="7" size-xs="7">
-                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" button (click)="seleccionarSilleteria($event)" detailIcon="chevron-down-outline" lines="none" detail>
-                        <ion-input class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar sillas" [value]="numeroSillas" readonly>
+                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" detailIcon="chevron-down-outline" lines="none" button (click)="seleccionarSilleteria($event)" detail>
+                        <ion-input class="select cursor" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar sillas" [value]="numeroSillas" readonly>
                         </ion-input>
                     </ion-item>
                 </ion-col>
                 <ion-col *ngIf="tieneSillas() === 2" size-lg="3" size-md="3" size-sm="7" size-xs="7">
-                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" button (click)="seleccionarCantidad($event)" detailIcon="chevron-down-outline" lines="none" detail>
-                        <ion-input class="select" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar sillas" [value]="numeroSillas" readonly>
+                    <ion-item class="item-select" [style.--background]="estiloEvento.COLOR_BACKGROUND" detailIcon="chevron-down-outline" lines="none" button (click)="seleccionarCantidad($event)" detail>
+                        <ion-input class="select cursor" [style.color]="estiloGeneral.COLOR_TEXT" placeholder="Seleccionar sillas" [value]="numeroSillas" readonly>
                         </ion-input>
                     </ion-item>
                 </ion-col>
@@ -223,7 +223,11 @@
                         </ion-button>
                     </ion-col>
                     <ion-col size-lg="4" size-md="4" size-sm="0" size-xs="0">
-
+                        <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" (click)="openModalRegistrarPin()" mode="ios" fill="clear ">
+                            <ion-text>
+                                <h3>Activar PIN</h3>
+                            </ion-text>
+                        </ion-button>
                     </ion-col>
                     <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
                         <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" [disabled]="!numeroSillas" (click)="openVerificarPedido()" mode="ios" fill="clear">
@@ -256,7 +260,7 @@
                 <!--<video class="videoPlayer" controls="controls" preload="none" webkit-playsinline="webkit-playsinline" (click)="toggleVideo()" #videoPlayer>
                     <source [src]="url" type="video/mp4" />
                 </video>-->
-                <iframe class="videoPlayer" [src]="vidUrl" frameborder="0" allowfullscreen></iframe>
+                <iframe class="videoPlayer" [src]="vidUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
                 <!--<div class="videoPlayer" [innerHtml]="url"></div>-->
             </ion-col>

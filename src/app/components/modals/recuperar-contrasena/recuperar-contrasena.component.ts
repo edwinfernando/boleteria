@@ -43,7 +43,7 @@ export class RecuperarContrasenaComponent implements OnInit {
       correo: ['', Validators.compose([
         Validators.required,
         // Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
-        Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}')
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
       ])],
       numeroDocumento: ['', Validators.compose([
         Validators.required,
@@ -69,21 +69,25 @@ export class RecuperarContrasenaComponent implements OnInit {
   }
 
   onClickRecuperar() {
-    /*this.utilService.showLoading();
-    this.dataService.loginUsuario(this.loginForm.value.correo, this.loginForm.value.contrasena)
-        .then( resp => {
+    this.utilService.showLoading();
+    const request = {
+      strPeticion: JSON.stringify({
+        correo: this.recuperarForm.value.correo,
+        identificacion: this.recuperarForm.value.numeroDocumento
+      })
+    };
+    this.dataService.recuperarClave(request)
+        .then( (resp: string) => {
           this.utilService.dissmisLoading();
           this.modalCtlr.dismiss(
             true
           );
+          this.utilService.showAlert('Información', resp);
           // this.router.navigateByUrl('/home', { skipLocationChange: true });
         }).catch( resp => {
           this.utilService.dissmisLoading();
-          this.modalService.showAlert('Algo salio mal', resp);
-        });*/
-    this.modalCtlr.dismiss(
-            true
-          );
+          this.utilService.showAlert('Algo salio mal', resp);
+        });
   }
 
   validarCampo(event) {

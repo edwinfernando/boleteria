@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GENERAL, EVENTOS, BOTONES, SLIDE, EVENTODISPONIBLE, LOCALIDAD, SILLETERIA, SILLAS, Boleteria, EventoImagenes } from '../../interfaces/interfaces';
+import { GENERAL, EVENTOS, BOTONES, SLIDE, EVENTODISPONIBLE, LOCALIDAD, SILLETERIA, SILLAS, Boleteria, EventoImagenes, DETALLEUSUARIO } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { IonContent, IonSlides, NavController, PopoverController } from '@ionic/angular';
 import { ModalService } from '../../services/modal.service';
@@ -13,6 +13,8 @@ import { SilleteriaComponent } from '../../components/popovers/silleteria/sillet
 import { LocalidadComponent } from '../../components/popovers/localidad/localidad.component';
 import { CantidadComponent } from '../../components/popovers/cantidad/cantidad.component';
 import { element } from 'protractor';
+import { SplashService } from '../../services/splash.service';
+import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -55,13 +57,14 @@ export class EventoPage implements OnInit {
     eventoHoraApertura: '',
     eventoFechaFin: '',
     eventoDepartamento: '',
-    eventoTipoEventoId: 0
+    eventoTipoEventoId: 0,
+    eventoValorTransaccion: 0
   };
 
   imagenesBanner: EventoImagenes[];
   imagenEscenario: EventoImagenes;
   imagenesEvento: EventoImagenes[];
-  
+
   hoy: any;
   dias: any;
   horas: any;
@@ -143,11 +146,10 @@ export class EventoPage implements OnInit {
               private dataService: DataService,
               private modalService: ModalService,
               private utilService: UtilidadesService,
-              private route: Router,
-              private videoPlayer: VideoPlayer,
               private sanitizer: DomSanitizer,
               private navCtrl: NavController,
-              private popoverController: PopoverController) {
+              private popoverController: PopoverController,
+              private splasService: SplashService) {
     this.hoy = new Date();
     this.dataLocal.setPage('evento');
   }
@@ -172,7 +174,7 @@ export class EventoPage implements OnInit {
     this.activeRouter.queryParams.subscribe( resp => {
       this.dataService.getEventoPorId(resp.evento.toString())
             .then( (respEvent: EVENTODISPONIBLE) => {
-              console.log(respEvent);
+              this.splasService.dissmissSplash();
               this.evento = respEvent;
               const fechados = new Date(this.evento.eventoFechaInicio);
               const resultado = fechados.getTime() - this.hoy.getTime();
@@ -187,6 +189,7 @@ export class EventoPage implements OnInit {
                 this.getLinkVideo();
               }
             }).catch( respEvent => {
+              this.splasService.dissmissSplash();
               this.utilService.showAlert('Algo salio mal', respEvent);
               this.navCtrl.pop();
             });
@@ -206,7 +209,8 @@ export class EventoPage implements OnInit {
 
   scrollTo(el: string) {
     const yOffset = document.getElementById(el).offsetTop;
-    this.content.scrollByPoint(0, yOffset - 50, 1000);
+    console.log(window.innerWidth);
+    this.content.scrollByPoint(0, yOffset - 100, 2000);
   }
 
   next() {
@@ -221,9 +225,29 @@ export class EventoPage implements OnInit {
     this.modalService.openModalSolicitar();
   }
 
-  openVerificarPedido(){
+  openModalRegistrarPin() {
+    this.dataLocal.getLogin().then(async resp => {
+      if (resp !== false) {
+        this.modalService.openModalRegistrarPin();
+      } else {
+        const result = await this.utilService.showAlertResult('Información', 'Para poder registrar la entrada, debes iniciar sesión');
+
+        if (result){
+          this.toolbarComponent.openModalIniciarSesion();
+        }
+      }
+    });
+    
+  }
+
+  async openVerificarPedido(){
     this.ordenarBoleteria();
-    this.modalService.openModalVerificarPedido(this.lBoleteria);
+    const result = await this.modalService.openModalVerificarPedido(this.lBoleteria);
+    console.log(result);
+
+    if (result){
+      this.toolbarComponent.getDetalleUsuario();
+    }
   }
 
   /** Contador de tiempo para el evento */
@@ -266,11 +290,11 @@ export class EventoPage implements OnInit {
       console.log(this.url);
     }
 
-    let newURL = 'https://www.youtube.com/watch?v=88I2nbh7rKU&ab_channel=carmelin7';//this.evento.eventoVideo;
+    let newURL = this.evento.eventoVideo;
     newURL = newURL.replace('watch?v=', 'embed/');
-    this.url = newURL;
+   // console.log(newURL);
+   // this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/tgbNymZ7vqY');
     this.vidUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newURL);
-    console.log(this.vidUrl);
   }
 
   toggleVideo() {
@@ -348,9 +372,9 @@ export class EventoPage implements OnInit {
               };
               this.sillaTemp.silla = silla;
               this.sillas.push(this.sillaTemp);
-
             });
 
+            console.log(this.sillas);
             if (this.sillas.length === 0) {
                 this.numeroSillas = 1;
             }
@@ -444,7 +468,10 @@ export class EventoPage implements OnInit {
         eventoDepartamento: this.evento.eventoDepartamento,
         eventoEscenario: this.evento.eventoEscenario,
         eventoDireccion: this.evento.eventoDireccion,
+        eventoId: this.evento.eventoId,
         localidad: this.zona.zonaNombre,
+        eventoValorTransaccion: this.evento.eventoValorTransaccion,
+        zonaId: this.zona.zonaId,
         silla,
         expanded: false
       };

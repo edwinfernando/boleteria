@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Boleteria, GENERAL, BOTONES, EVENTODISPONIBLE, DETALLEUSUARIO, SILLAS } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { ModalController, NavController } from '@ionic/angular';
 import { ModalService } from '../../services/modal.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilidadesService } from '../../services/utilidades.service';
+import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-verificar-pedido',
@@ -21,7 +22,9 @@ export class VerificarPedidoPage implements OnInit {
   descripcion = '¿Aún no tienes una cuentas en BoletasWeb?. Crear una cuenta te permite acceder a des- cuentos especiales, enterarte de futuros eventos entes que otras personas y facilita tu proceso de compra.';
   isChecked: any;
   @Input() lBoleteria: Boleteria [] = [];
+  eventoValorTransaccion = 0;
   isLogueado = false;
+  lengthExpanded = false;
   detalleUsuario: DETALLEUSUARIO = {
     idUsuario: '',
     usuarioNombreLogin: '',
@@ -61,41 +64,18 @@ export class VerificarPedidoPage implements OnInit {
     });
 
     this.getDetalleUsuario();
-    //this.ordenarBoleteria();
+    this.eventoValorTransaccion = this.lBoleteria[0].eventoValorTransaccion;
+    if (this.lBoleteria.length === 1){
+      this.lengthExpanded = true;
+    }
   }
-
- /* ordenarBoleteria(){
-    if (this.sillas.length > 0){
-      this.sillas = this.sillas.filter( silla => silla.selected);
-
-    }
-
-    for (let index = 0; index < this.numeroSillas; index++) {
-      let silla = '';
-      if (this.sillas.length > 0){
-        silla = this.sillas[index].silla.silleteriaNombre;
-      }
-      const boleta: Boleteria = {
-        nombre: this.evento.eventoNombre,
-        valor: this.zona.zonaValor,
-        eventoFechaInicio: this.evento.eventoFechaInicio,
-        eventoCiudad: this.evento.eventoCiudad,
-        eventoDepartamento: this.evento.eventoDepartamento,
-        eventoEscenario: this.evento.eventoEscenario,
-        eventoDireccion: this.evento.eventoDireccion,
-        localidad: this.zona.zonaNombre,
-        silla,
-        expanded: false
-      };
-      this.lBoleteria.push(boleta);
-    }
-  }*/
 
   async getDetalleUsuario(){
     await this.dataLocal.getLogin().then(resp => {
       if (resp !== false){
         this.isLogueado = true;
         this.detalleUsuario = resp;
+        this.detalleUsuario.usuarioNombrePersona = this.detalleUsuario.usuarioNombrePersona.toLowerCase();
       } else {
         this.isLogueado = false;
       }
@@ -110,11 +90,15 @@ export class VerificarPedidoPage implements OnInit {
 
   closeModal() {
     // this.navCtrl.pop();
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(
+      this.isLogueado
+    );
   }
 
   async completarCompra() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(
+      this.isLogueado
+    );
     const data = await this.modalService.openModalTuPedido(this.lBoleteria);
     console.log(data);
   }
@@ -122,6 +106,15 @@ export class VerificarPedidoPage implements OnInit {
   async openModalRegistrate(){
     const result = await this.modalService.openModalRegistrate(this.modalCtrl, false);
     console.log(result);
+
+    if (result){
+      this.getDetalleUsuario();
+    }
+  }
+
+  async openModalIniciarSesion(){
+    const result = await this.modalService.openModalIniciarSesion();
+    this.isLogueado = result;
 
     if (result){
       this.getDetalleUsuario();

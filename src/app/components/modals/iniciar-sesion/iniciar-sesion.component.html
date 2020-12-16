@@ -14,13 +14,13 @@
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" placeholder="Dirección de correo electronico"></ion-input>
+                        <ion-input type="email" formControlName="correo" (ionChange)="validarCampoChange('correo')" (ionBlur)="validarCampo('correo')" placeholder="Dirección de correo electronico *"></ion-input>
                     </ion-item>
                     <span *ngIf="isCorreoValido" class="requerido">Campo invalido</span>
                 </ion-col>
                 <ion-col size="12" class="ion-text-left">
                     <ion-item class="input-style" lines="none" mode="ios">
-                        <ion-input type="password" formControlName="contrasena" (ionChange)="validarCampoChange('contrasena')" (ionBlur)="validarCampo('contrasena')" placeholder="Contraseña"></ion-input>
+                        <ion-input type="password" formControlName="contrasena" (ionChange)="validarCampoChange('contrasena')" (ionBlur)="validarCampo('contrasena')" placeholder="Contraseña *"></ion-input>
                     </ion-item>
                     <span *ngIf="isPasswordValido" class="requerido">Campo invalido</span>
                 </ion-col>

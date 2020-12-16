@@ -1,11 +1,5 @@
 <ion-grid fixed>
     <ion-row>
-        <ion-col *ngIf="notificacion.evento !== ''" size="12">
-            <ion-item class="item-style background-gris" mode="md" lines="none">
-                <ion-label [style.color]="estiloGeneral.COLOR_TEXT" slot="start">{{notificacion.evento}}</ion-label>
-                <ion-label class="centrado" [style.color]="estiloGeneral.COLOR_TEXT" slot="end">{{notificacion.valor}}</ion-label>
-            </ion-item>
-        </ion-col>
         <ion-col size="6">
             <ion-row>
                 <ion-col size="12">
@@ -80,7 +74,7 @@
             </ion-item>
         </ion-col>
 
-        <ion-col *ngIf="notificacion.transferible" size="12">
+        <ion-col *ngIf="notificacion.solicitudTransferir" size="12">
             <ion-row>
                 <ion-col size-lg="8" size-md="8" size-sm="0" size-xs="0">
                 </ion-col>
@@ -94,7 +88,7 @@
             </ion-row>
         </ion-col>
 
-        <ion-col *ngIf="notificacion.received" size="12">
+        <!--<ion-col *ngIf="notificacion.received" size="12">
             <ion-row>
                 <ion-col size-lg="8" size-md="8" size-sm="0" size-xs="0">
                 </ion-col>
@@ -106,6 +100,6 @@
                     </ion-button>
                 </ion-col>
             </ion-row>
-        </ion-col>
+        </ion-col>-->
     </ion-row>
 </ion-grid>

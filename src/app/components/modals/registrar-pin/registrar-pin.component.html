@@ -1,0 +1,43 @@
+<app-toolbar-modal></app-toolbar-modal>
+
+<ion-content class="centrado no-scroll ion-padding">
+    <form [formGroup]="pinForm" (ngSubmit)="onClickRegistrar()">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-label [style.color]="estiloGeneral.COLOR_TEXT">
+                        <h1><strong>Registrar entrada</strong></h1>
+                    </ion-label>
+                </ion-col>
+                <!-- DATOS -->
+
+                <ion-col size="12">
+                    <br>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item class="item-style" lines="none" mode="ios">
+                        <ion-label><small><h5 class="texto-justificado">Ingresa el número pin que identifica tu entrada</h5></small></ion-label>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="12" class="ion-text-left">
+                    <ion-item class="input-style" lines="none" mode="ios">
+                        <ion-input type="text" minlength="7" maxlength="10" formControlName="numeroPin" (ionChange)="validarCampoChange('numeroPin')" (ionBlur)="validarCampo('numeroPin')" placeholder="Número pin *"></ion-input>
+                    </ion-item>
+                    <span *ngIf="isPinValido" class="requerido">Campo invalido</span>
+                </ion-col>
+                <ion-col size="12">
+                    <br>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" [disabled]="pinForm.invalid" type="submit" expand="block" fill="clear">
+                        <ion-item class="item-style item-button" lines="none" mode="ios">
+                            <ion-label>ACTIVAR</ion-label>
+                        </ion-item>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </form>
+</ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Notificacion, GENERAL, BOTONES } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-notificaciones',
@@ -12,44 +13,31 @@ export class NotificacionesPage implements OnInit {
   @Output() ajustarToolbar = new EventEmitter<boolean>();
   lNotificacion: Notificacion [] = [
     {
-      nombre: 'Jhony Velasco',
-      valor: '$200.000',
+      idTransferencia: 1,
+      nombrePersonaEnvia: 'Jhony Velasco',
       notificacion: 'Jhony Velasco te ha solicitado una entrada',
       expanded: false,
-      evento: 'Concierto 1',
       opened: false,
-      transferible: true,
-      received: false
+      solicitudTransferir: true,
+      boleta: null
     },
     {
-      nombre: 'Juan Esteban',
-      valor: '$200.000',
+      idTransferencia: 2,
+      nombrePersonaEnvia: 'Juan Esteban',
       notificacion: 'Juan Esteban Masmela te ha enviado una entrada',
       expanded: false,
-      evento: 'Concierto 2',
       opened: false,
-      transferible: false,
-      received: true
+      solicitudTransferir: false,
+      boleta: null
     },
     {
-      nombre: 'Sebastian Suaza',
-      valor: '$200.000',
-      notificacion: 'Sebastian Suaza te ha enviado una entrada',
-      expanded: false,
-      evento: 'Concierto 2',
-      opened: true,
-      transferible: true,
-      received: false
-    },
-    {
-      nombre: 'Erika Inés Aguirre',
-      valor: '$200.000',
+      idTransferencia: 3,
+      nombrePersonaEnvia: 'Erika Inés Aguirre',
       notificacion: 'Erika Inés Aguirre te ha enviado una entrada',
       expanded: false,
-      evento: 'Concierto 4',
       opened: true,
-      transferible: false,
-      received: true
+      solicitudTransferir: false,
+      boleta: null
     }
   ];
 
@@ -66,7 +54,12 @@ export class NotificacionesPage implements OnInit {
     COLOR_BACKGROUND_B_COMPARTIR: '',
     COLOR_TEXT: ''
   };
-  constructor(private dataLocal: DataLocalService) { }
+  documento: string;
+  etiquetaTitulo = 'Próximos eventos';
+  lengthExpanded = false;
+
+  constructor(private dataLocal: DataLocalService,
+              private dataService: DataService) { }
 
   async ngOnInit() {
     await this.dataLocal.cargarConfiguracion().then( resp => {
@@ -77,6 +70,16 @@ export class NotificacionesPage implements OnInit {
     });
 
     this.ajustarToolbarEmitter(false);
+  }
+
+  async ngAfterViewInit() {
+    await this.dataLocal.getLogin().then(resp => {
+      if (resp !== false){
+        this.documento = resp.usuarioDocumento;
+        // se habilita cuando este el servicio
+       // this.consultarNotificaciones(); 
+      }
+    });
   }
 
   onClickNotificacion(notificacion: Notificacion){
@@ -93,5 +96,30 @@ export class NotificacionesPage implements OnInit {
     if (this.lNotificacion.length >= 2 ){
       this.ajustarToolbar.emit(ajustar);
     }
+  }
+
+  async consultarNotificaciones(){
+    // this.documento = '1212121221';
+    const request = {
+      strPeticion: JSON.stringify({
+        documento: this.documento
+      })};
+
+    this.lNotificacion = [];
+
+    await this.dataService.consultarNotificaciones(request)
+      .then( (resp: Notificacion []) => {
+        console.log(resp);
+        this.lNotificacion = resp;
+        this.lNotificacion.forEach( noti => {
+          noti.expanded = false;
+        });
+        if (this.lNotificacion.length === 1){
+          this.lengthExpanded = true;
+        }
+      }).catch( resp => {
+      //  this.utilService.showAlert('Información', resp);
+        this.etiquetaTitulo = resp;
+      });
   }
 }

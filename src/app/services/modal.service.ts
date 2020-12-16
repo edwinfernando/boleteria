@@ -13,6 +13,8 @@ import { CambiarContrasenaComponent } from '../components/modals/cambiar-contras
 import { ErrorConexionComponent } from '../components/modals/error-conexion/error-conexion.component';
 import { VerificarPedidoPage } from '../pages/verificar-pedido/verificar-pedido.page';
 import { EVENTODISPONIBLE, SILLAS, Boleteria } from '../interfaces/interfaces';
+import { ContactenosComponent } from '../components/modals/contactenos/contactenos.component';
+import { RegistrarPinComponent } from '../components/modals/registrar-pin/registrar-pin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -162,11 +164,11 @@ export class ModalService {
     }
   }
 
-  async openModalTransferir(){
+  async openModalTransferir(boleteria: Boleteria){
     const modal = await this.modalCtrl.create({
       component: TransferirEntradaComponent,
       componentProps: {
-        // tarjeta: JSON.stringify(this.tarjeta)
+        boleteria
       },
       cssClass: 'modal-class-transferir',
       mode: 'ios',
@@ -186,6 +188,18 @@ export class ModalService {
     await modal.present();
   }
 
+  async openModalRegistrarPin(){
+    const modal = await this.modalCtrl.create({
+      component: RegistrarPinComponent,
+      componentProps: {
+        // tarjeta: JSON.stringify(this.tarjeta)
+      },
+      cssClass: 'modal-class-pin',
+      mode: 'ios',
+    });
+    await modal.present();
+  }
+
   async openModalVerificarPedido(lBoleteria: Boleteria[]){
     const modal = await this.modalCtrl.create({
       component: VerificarPedidoPage,
@@ -196,6 +210,13 @@ export class ModalService {
       mode: 'ios',
     });
     await modal.present();
+    const data = await modal.onDidDismiss();
+
+    if (data.data !== undefined) {
+      return data.data;
+    } else {
+      return false;
+    }
   }
 
   async openModalTuPedido(lBoleteria: Boleteria[]){
@@ -227,5 +248,24 @@ export class ModalService {
       mode: 'md',
     });
     await modal.present();
+  }
+
+  async openModalContactenos(){
+    const modal = await this.modalCtrl.create({
+      component: ContactenosComponent,
+      cssClass: 'modal-contactenos',
+      mode: 'ios',
+      swipeToClose: false,
+      keyboardClose: true,
+      backdropDismiss: false
+    });
+    await modal.present();
+    const data = await modal.onDidDismiss();
+
+    if (data.data !== undefined) {
+      return data.data;
+    } else {
+      return false;
+    }
   }
 }
