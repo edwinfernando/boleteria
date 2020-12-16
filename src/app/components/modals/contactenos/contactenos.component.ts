@@ -52,6 +52,11 @@ export class ContactenosComponent implements OnInit {
           codigo: '3',
           nombreTipo: 'Tarjeta de credito',
           tipoSolicitud: []
+        },
+        {
+          codigo: '4',
+          nombreTipo: 'Saldo cuenta',
+          tipoSolicitud: []
         }
       ]
     },
@@ -67,7 +72,33 @@ export class ContactenosComponent implements OnInit {
     {
       codigo: '3',
       nombreTipo: 'Peticiones',
-      tipoSolicitud: []
+      tipoSolicitud: [
+        {
+          codigo: '1',
+          nombreTipo: 'Bloqueo de boletas robadas o extraviadas',
+          tipoSolicitud: []
+        },
+        {
+          codigo: '2',
+          nombreTipo: 'Cambio de destinatario',
+          tipoSolicitud: []
+        },
+        {
+          codigo: '3',
+          nombreTipo: 'Cambio de evento',
+          tipoSolicitud: []
+        },
+        {
+          codigo: '4',
+          nombreTipo: 'Cambio de horario de funciones',
+          tipoSolicitud: []
+        },
+        {
+          codigo: '5',
+          nombreTipo: 'Cambio de ubicacioón',
+          tipoSolicitud: []
+        }
+      ]
     },
     {
       codigo: '4',
@@ -82,6 +113,52 @@ export class ContactenosComponent implements OnInit {
           codigo: '4',
           nombreTipo: 'Inconformidad en momento de compra',
           tipoSolicitud: []
+        },
+        {
+          codigo: '5',
+          nombreTipo: 'Mala atención en canales de venta',
+          tipoSolicitud: []
+        },
+        {
+          codigo: '6',
+          nombreTipo: 'Mala organización del evento',
+          tipoSolicitud: []
+        },
+        {
+          codigo: '7',
+          nombreTipo: 'Página web',
+          tipoSolicitud: [
+            {
+            codigo: '1',
+            nombreTipo: 'Ajuste fraude confirmado',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '2',
+            nombreTipo: 'Aplazamiento de evento',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '3',
+            nombreTipo: 'Cambio condiciones del evento',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '4',
+            nombreTipo: 'Eliminación de cuenta',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '5',
+            nombreTipo: 'Fuerza mayor',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '6',
+            nombreTipo: 'Soporte Devolución',
+            tipoSolicitud: []
+          }
+        ]
         }
       ]
     },
@@ -92,7 +169,21 @@ export class ContactenosComponent implements OnInit {
         {
           codigo: '3',
           nombreTipo: 'Aplazamiento de evento',
-          tipoSolicitud: []
+          tipoSolicitud: [{
+            codigo: '4',
+            nombreTipo: 'Datos de enrolamiento',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '5',
+            nombreTipo: 'Solicitud',
+            tipoSolicitud: []
+          },
+          {
+            codigo: '6',
+            nombreTipo: 'Tarjeta internacional',
+            tipoSolicitud: []
+          }]
         }
       ]
     },

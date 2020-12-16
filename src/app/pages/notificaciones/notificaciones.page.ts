@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Notificacion, GENERAL, BOTONES } from '../../interfaces/interfaces';
+import { Notificacion, GENERAL, BOTONES, Boleteria } from '../../interfaces/interfaces';
 import { DataLocalService } from '../../services/data-local.service';
 import { DataService } from '../../services/data.service';
 
@@ -19,7 +19,7 @@ export class NotificacionesPage implements OnInit {
       expanded: false,
       opened: false,
       solicitudTransferir: true,
-      boleta: null
+      boleta: []
     },
     {
       idTransferencia: 2,
@@ -28,7 +28,7 @@ export class NotificacionesPage implements OnInit {
       expanded: false,
       opened: false,
       solicitudTransferir: false,
-      boleta: null
+      boleta: []
     },
     {
       idTransferencia: 3,
@@ -37,9 +37,25 @@ export class NotificacionesPage implements OnInit {
       expanded: false,
       opened: true,
       solicitudTransferir: false,
-      boleta: null
+      boleta: []
     }
   ];
+
+  boleta: Boleteria = {
+    nombre: 'Evento prueba',
+    valor: 30000,
+    eventoId: 1,
+    eventoFechaInicio: '2020-11-30 03:00:00.0',
+    eventoCiudad: 'MEDELLIN',
+    eventoDepartamento: 'ANTIOQUIA',
+    eventoEscenario: 'Pascualito',
+    eventoDireccion: 'Calle 123, Falsa',
+    eventoValorTransaccion: 1200,
+    localidad: 'VIP',
+    zonaId: 1,
+    silla: '5',
+    expanded: false
+  };
 
   estiloGeneral: GENERAL = {
     COLOR_BACKGROUND_GENERAL: '',
@@ -76,7 +92,10 @@ export class NotificacionesPage implements OnInit {
     await this.dataLocal.getLogin().then(resp => {
       if (resp !== false){
         this.documento = resp.usuarioDocumento;
-        // se habilita cuando este el servicio
+        // se habilita cuando este el servicio y se elima esto que solo para ejemplo
+        this.lNotificacion[0].boleta.push(this.boleta);
+        this.lNotificacion[0].boleta.push(this.boleta);
+        this.lNotificacion[0].boleta.push(this.boleta);
        // this.consultarNotificaciones(); 
       }
     });

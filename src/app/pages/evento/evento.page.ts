@@ -209,7 +209,6 @@ export class EventoPage implements OnInit {
 
   scrollTo(el: string) {
     const yOffset = document.getElementById(el).offsetTop;
-    console.log(window.innerWidth);
     this.content.scrollByPoint(0, yOffset - 100, 2000);
   }
 
@@ -222,7 +221,17 @@ export class EventoPage implements OnInit {
   }
 
   openModalSolicitarEntrada() {
-    this.modalService.openModalSolicitar();
+    this.dataLocal.getLogin().then(async resp => {
+      if (resp !== false) {
+        this.modalService.openModalSolicitar();
+      } else {
+        const result = await this.utilService.showAlertResult('Información', 'Para poder solicitar una entrada, debes iniciar sesión');
+
+        if (result){
+          this.toolbarComponent.openModalIniciarSesion();
+        }
+      }
+    });
   }
 
   openModalRegistrarPin() {
@@ -240,10 +249,27 @@ export class EventoPage implements OnInit {
     
   }
 
+  openModalEntrarEvento() {
+    this.dataLocal.getLogin().then(async resp => {
+      if (resp !== false) {
+       // this.modalService.openModalRegistrarPin();
+       this.utilService.showAlertResult('Información', 'Aún no esta habilitada esa sesión');
+      } else {
+        const result = await this.utilService.showAlertResult('Información', 'Para poder entrar al evento, debes iniciar sesión');
+
+        if (result){
+          this.toolbarComponent.openModalIniciarSesion();
+        }
+      }
+    });
+    
+  }
+
+  
+
   async openVerificarPedido(){
     this.ordenarBoleteria();
     const result = await this.modalService.openModalVerificarPedido(this.lBoleteria);
-    console.log(result);
 
     if (result){
       this.toolbarComponent.getDetalleUsuario();
@@ -291,6 +317,10 @@ export class EventoPage implements OnInit {
     }
 
     let newURL = this.evento.eventoVideo;
+    if (newURL.includes('&')){
+      let newURLTemp = newURL.split('&');
+      newURL = newURLTemp[0];
+    }
     newURL = newURL.replace('watch?v=', 'embed/');
    // console.log(newURL);
    // this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/tgbNymZ7vqY');

@@ -93,6 +93,31 @@ export class DataService {
     });
   }
 
+  consultarInfoNosotros() {
+    const empresa = {
+      strPeticion: JSON.stringify({
+        nitEmpresa: NIT_EMPRESA
+      })};
+
+    return new Promise( (resolve, reject) => {
+      this.http.post(`${URL}/portal/configuracion/consultarEmpresa`,
+                      empresa,
+                      { headers: this.httpOptions }).subscribe(
+                        (strRespuesta: RespuestaServidor) => {
+                          strRespuesta = JSON.parse(strRespuesta.respuesta);
+                          if (strRespuesta.codigoRespuesta === '0'){
+                            resolve(strRespuesta.respuesta);
+                          }else {
+                            reject(strRespuesta.mensajeRespuesta);
+                          }
+                        },
+                        error => {
+                          console.error(error);
+                        }
+                      );
+    });
+  }
+
   loginUsuario(login: string, password: string) {
     const request = {
       strPeticion: JSON.stringify({

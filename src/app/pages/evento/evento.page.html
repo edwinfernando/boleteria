@@ -200,6 +200,16 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
+
+            <ion-row>
+                <ion-col class="margin-auto" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+                    <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" [disabled]="!numeroSillas" (click)="openVerificarPedido()" mode="ios" fill="clear">
+                        <ion-text>
+                            <h3>Comprar entrada</h3>
+                        </ion-text>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
         </ion-grid>
 
 
@@ -215,24 +225,24 @@
             </ion-col>
             <ion-col size="12">
                 <ion-row>
-                    <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
+                    <ion-col class="margin-auto" size-lg="4" size-md="4" size-sm="12" size-xs="12">
                         <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" (click)="openModalSolicitarEntrada()" mode="ios" fill="clear ">
                             <ion-text>
                                 <h3>Solicitar entrada</h3>
                             </ion-text>
                         </ion-button>
                     </ion-col>
-                    <ion-col size-lg="4" size-md="4" size-sm="0" size-xs="0">
+                    <ion-col class="margin-auto" size-lg="4" size-md="4" size-sm="0" size-xs="0">
                         <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" (click)="openModalRegistrarPin()" mode="ios" fill="clear ">
                             <ion-text>
                                 <h3>Activar PIN</h3>
                             </ion-text>
                         </ion-button>
                     </ion-col>
-                    <ion-col size-lg="4" size-md="4" size-sm="12" size-xs="12">
-                        <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" [disabled]="!numeroSillas" (click)="openVerificarPedido()" mode="ios" fill="clear">
+                    <ion-col class="margin-auto" *ngIf="evento.eventoModalidadEventoId !== 128" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+                        <ion-button class="button-acceso" [style.--background]="estiloBotones.COLOR_BACKGROUND_B_ACCESO" [style.color]="estiloBotones.COLOR_TEXT" size="large" expand="block" (click)="openModalEntrarEvento()" mode="ios" fill="clear">
                             <ion-text>
-                                <h3>Comprar entrada</h3>
+                                <h3>Ingresar a evento</h3>
                             </ion-text>
                         </ion-button>
                     </ion-col>

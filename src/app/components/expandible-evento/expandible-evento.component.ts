@@ -68,15 +68,18 @@ export class ExpandibleEventoComponent implements OnInit {
       }
     });
 
-    this.notificacion.boleta = this.boleta;
     this.boleta.expanded = this.expanded;
+    console.log(this.notificacion);
   }
 
-  openModalTransferir(){
+  openModalTransferir(boleta: Boleteria){
     this.utilService.showLoading();
     const request = {
       strPeticion: JSON.stringify({
         notificacionId: this.notificacion.idTransferencia,
+        eventoId: boleta.eventoId,
+        zonaId: boleta.zonaId,
+        silla: boleta.silla
       })
     };
 

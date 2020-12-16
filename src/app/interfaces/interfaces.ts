@@ -55,7 +55,7 @@ export interface Notificacion {
   idTransferencia: number;
   nombrePersonaEnvia: string;
   notificacion: string;
-  boleta: Boleteria;
+  boleta: Boleteria [];
   solicitudTransferir: boolean;
   expanded: boolean;
   opened: boolean;
@@ -303,4 +303,15 @@ export interface TIPOQUEJASOLICITUD {
 export interface SOLICITUDEVENTO{
   codigo: number;
   nombreEvento: string;
+}
+
+export interface NOSOTROS{
+  imagenBanner: string;
+  nosotros: string;
+  imagenNosotros: string;
+  etiquetaImagenNosotros: string;
+  videoNosotros: string;
+  imagenQuienSomos: string;
+  quienSomos: string;
+  patrocinadores: Patrocinadores[]
 }
